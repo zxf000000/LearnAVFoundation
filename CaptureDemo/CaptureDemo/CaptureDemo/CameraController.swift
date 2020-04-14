@@ -258,15 +258,45 @@ class CameraController: NSObject {
         self.imageOutput.capturePhoto(with: settings, delegate: self)
     }
     func startRecording() {
-
+        if self.isRecording() == false {
+            let connection = movieOutput.connection(with: .video)
+            if connection?.isVideoOrientationSupported == true {
+                connection?.videoOrientation = currentVideoOrientation()
+            }
+            if connection?.isVideoStabilizationSupported == true {
+                connection?.preferredVideoStabilizationMode = .auto
+            }
+            let device = activeCamera()
+            if device.isSmoothAutoFocusSupported == true {
+                do {
+                    try device.lockForConfiguration()
+                    device.isSmoothAutoFocusEnabled = true
+                    device.unlockForConfiguration()
+                } catch {
+                    delegate.deviceConfigurationFailed(with: nil)
+                }
+                
+                outputURL = uniqURL()
+                movieOutput.startRecording(to: outputURL, recordingDelegate: self)
+            }
+        }
     }
-    func stopRecording() {
-
+    func stopRecording()  {
+        if self.isRecording() == true {
+            self.movieOutput.stopRecording()
+        }
     }
     func isRecording() -> Bool {
-        return false
+        return self.movieOutput.isRecording
     }
 
+    func uniqURL() -> URL? {
+        let temPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        let filePath = temPath?.appending("/kamerra_movie.mov") ?? ""
+            
+        return URL(fileURLWithPath: filePath)
+    }
+    
     func currentVideoOrientation() -> AVCaptureVideoOrientation {
         var orientation: AVCaptureVideoOrientation?
         switch UIDevice.current.orientation {
@@ -340,13 +370,28 @@ extension CameraController: AVCapturePhotoCaptureDelegate {
                                 print("保存完成")
                             })
                 }
-
-
-
-
             } else {
                 print("null sample buffer \(error?.localizedDescription)")
             }
         }
     }
+}
+
+extension CameraController: AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        if error != nil {
+            delegate.mediaCaptureFailed(with: error)
+        } else {
+            print(outputURL!)
+            PHPhotoLibrary.shared().performChanges({
+                
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
+                
+            }) { (result, error) in
+                
+            }
+        }
+    }
+    
+    
 }
