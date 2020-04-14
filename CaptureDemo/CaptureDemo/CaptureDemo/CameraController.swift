@@ -373,6 +373,7 @@ extension CameraController: AVCapturePhotoCaptureDelegate {
             } else {
                 print("null sample buffer \(error?.localizedDescription)")
             }
+            
         }
     }
 }
