@@ -332,10 +332,17 @@ extension CameraController: AVCapturePhotoCaptureDelegate {
         if let sampleBuffer = photoSampleBuffer {
             if let imageData: Data = AVCapturePhotoOutput.jpegPhotoDataRepresentation(
                     forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: sampleBuffer) {
-                let image = UIImage(data: imageData)
-//
-//                let resourceManager = PHAssetResourceManager()
-//                resourceManager.
+                if let image = UIImage(data: imageData) {
+                    PHPhotoLibrary.shared()
+                            .performChanges({
+                                                PHAssetChangeRequest.creationRequestForAsset(from: image)
+                                            }, completionHandler: { result, error in
+                                print("保存完成")
+                            })
+                }
+
+
+
 
             } else {
                 print("null sample buffer \(error?.localizedDescription)")
