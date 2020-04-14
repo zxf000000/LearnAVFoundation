@@ -199,7 +199,7 @@
 				ORGANIZATIONNAME = zxf;
 				TargetAttributes = {
 					CA2D309F914CB34C08B03C94 = {
-						DevelopmentTeam = UZ9FCZ5X8D;
+						DevelopmentTeam = F6MK8JGT5P;
 					};
 				};
 			};
@@ -385,7 +385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UZ9FCZ5X8D;
+				DEVELOPMENT_TEAM = F6MK8JGT5P;
 				INFOPLIST_FILE = CaptureDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -413,7 +413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UZ9FCZ5X8D;
+				DEVELOPMENT_TEAM = F6MK8JGT5P;
 				INFOPLIST_FILE = CaptureDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
