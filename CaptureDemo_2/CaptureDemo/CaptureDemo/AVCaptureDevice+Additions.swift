@@ -23,7 +23,13 @@ extension AVCaptureDevice {
         for format in formats {
             /// 遍历所有捕捉设备的支持 formats 并对每一个元素从 fromatDescription 中获取相应的
             /// codecType(mediaSubType), 只需要 420YpCbCr8BiPlanarVideoRange 这个格式,筛选出视频格式
-            let codecType = format.formatDescription.mediaSubType.rawValue
+            var codecType: FourCharCode? = nil
+            if #available(iOS 13.0, *) {
+                codecType = format.formatDescription.mediaSubType.rawValue
+            } else {
+                // Fallback on earlier versions
+                codecType = CMFormatDescriptionGetMediaSubType(format.formatDescription)
+            }
             if codecType == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange {
                 let frameRateRanges = format.videoSupportedFrameRateRanges
                 for range in frameRateRanges {

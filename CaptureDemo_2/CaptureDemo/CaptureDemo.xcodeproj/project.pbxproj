@@ -13,7 +13,6 @@
 		CA2D33791F10F5F77355EC25 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3DFD2D4CCFB8472DD425 /* CameraController.swift */; };
 		CA2D33F9CF986E30739D26FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA2D3EC22A6FC682D9C4FB6A /* Assets.xcassets */; };
 		CA2D34FAC672D31D9AE39FCE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D37D5BBE8CA6DC3793F34 /* ViewController.swift */; };
-		CA2D35E0516B6250FA4BD443 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3C218DF7F63738164502 /* SceneDelegate.swift */; };
 		CA2D382A07D4F92EE4C6E08D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA2D34F486995CC1523B540A /* Main.storyboard */; };
 		CA2D3CEB9074C2F6FD3CBE13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3A024F1FFEF0CAE09D9C /* AppDelegate.swift */; };
 		CA2D3EA30338880A3B037400 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA2D3ABEB94F77F4F3151032 /* LaunchScreen.storyboard */; };
@@ -48,7 +47,6 @@
 		CA2D38FE26A82E8D2469796F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA2D3A024F1FFEF0CAE09D9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA2D3B6D30DE47871D7E6150 /* CaptureDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureDemoTests.swift; sourceTree = "<group>"; };
-		CA2D3C218DF7F63738164502 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CA2D3D03932C9003B405428F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		CA2D3DA0C2DD2C27EC6B6824 /* CaptureDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaptureDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2D3DFD2D4CCFB8472DD425 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 				CA2D3EC22A6FC682D9C4FB6A /* Assets.xcassets */,
 				CA2D3ABEB94F77F4F3151032 /* LaunchScreen.storyboard */,
 				CA2D3A024F1FFEF0CAE09D9C /* AppDelegate.swift */,
-				CA2D3C218DF7F63738164502 /* SceneDelegate.swift */,
 				CA2D37D5BBE8CA6DC3793F34 /* ViewController.swift */,
 				CA2D34F486995CC1523B540A /* Main.storyboard */,
 				CA2D30963BB20AEB090AB034 /* PreviewView.swift */,
@@ -268,7 +265,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA2D3CEB9074C2F6FD3CBE13 /* AppDelegate.swift in Sources */,
-				CA2D35E0516B6250FA4BD443 /* SceneDelegate.swift in Sources */,
 				CA2D34FAC672D31D9AE39FCE /* ViewController.swift in Sources */,
 				4E635D062446C081001D594B /* AVCaptureDevice+Additions.swift in Sources */,
 				CA2D3F2F19E87311B96CA09A /* PreviewView.swift in Sources */,
@@ -391,7 +387,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UZ9FCZ5X8D;
 				INFOPLIST_FILE = CaptureDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zxf.www.CaptureDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -419,7 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UZ9FCZ5X8D;
 				INFOPLIST_FILE = CaptureDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zxf.www.CaptureDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
