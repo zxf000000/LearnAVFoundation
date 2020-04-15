@@ -80,6 +80,8 @@ class ViewController: UIViewController {
         slider.addTarget(self, action: #selector(sliderValueChange), for: .valueChanged)
         
     }
+    
+    
         
     @objc
     func switcherChange() {
