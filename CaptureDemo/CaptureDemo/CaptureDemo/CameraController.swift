@@ -13,9 +13,21 @@ protocol CameraControllerDelegate {
     func assetLibraryWriteFailed(with error: Error?)
 }
 
+protocol CameraZoomingDelegate {
+    func rampedZoomToValue(_ value: CGFloat)
+}
+
+protocol FaceDetectionDelegate {
+    func didDetectionFaces(_ faces: [Any])
+}
+
 class CameraController: NSObject {
     var delegate: CameraControllerDelegate!
     var captureSession: AVCaptureSession!
+    var zoomingDelegate: CameraZoomingDelegate!
+    var faceDetectionDelegate: FaceDetectionDelegate!
+
+    var metaDataOutput: AVCaptureMetadataOutput!
 
     var cameraCount: Int! {
         get {
@@ -352,6 +364,73 @@ class CameraController: NSObject {
         return device!
     }
 
+}
+
+// MARK: detectionFace
+extension CameraController {
+    func setupSessionOutput() -> Bool {
+        metaDataOutput = AVCaptureMetadataOutput()
+        if captureSession.canAddOutput(metaDataOutput) {
+            captureSession.addOutput(metaDataOutput)
+            let metaDataObjectTypes: [AVMetadataObject.ObjectType] = [AVMetadataObject.ObjectType.face]
+            metaDataOutput.metadataObjectTypes = metaDataObjectTypes
+            metaDataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+extension CameraController: AVCaptureMetadataOutputObjectsDelegate {
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        for obj in metadataObjects {
+            if let object = obj as? AVMetadataFaceObject {
+                print("detected face in ID: \(object.faceID)")
+                print("face bounds \(object.bounds)")
+
+            }
+        }
+        
+    }
+
+}
+
+// MARK: zoom
+extension CameraController {
+    func cameraSupportsZoom() -> Bool {
+       return activeCamera().activeFormat.videoMaxZoomFactor > 1.0
+    }
+    func setZoomValue(_ value: CGFloat) {
+        if activeCamera().isRampingVideoZoom == false {
+            do {
+                try activeCamera().lockForConfiguration()
+                // 要提供线性增长的感觉,所以是哦那个pow函数
+                let zoomValue = pow(maxZoomFactor(), value)
+                activeCamera().videoZoomFactor = zoomValue
+                activeCamera().unlockForConfiguration()
+            } catch {
+                delegate.deviceConfigurationFailed(with: nil)
+            }
+        }
+    }
+    func rampZoomToValue(_ value: CGFloat) {
+        setZoomValue(value)
+    }
+    func cancelZoom() {
+        do {
+            try activeCamera().lockForConfiguration()
+            // 要提供线性增长的感觉,所以是哦那个pow函数
+            activeCamera().cancelVideoZoomRamp()
+            activeCamera().unlockForConfiguration()
+        } catch {
+            delegate.deviceConfigurationFailed(with: nil)
+        }
+
+    }
+    func maxZoomFactor() -> CGFloat {
+        return min(activeCamera().activeFormat.videoMaxZoomFactor, 4.0)
+    }
 }
 
 extension CameraController: AVCapturePhotoCaptureDelegate {
