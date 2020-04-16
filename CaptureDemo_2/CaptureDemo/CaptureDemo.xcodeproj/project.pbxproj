@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4E635D062446C081001D594B /* AVCaptureDevice+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E635D052446C081001D594B /* AVCaptureDevice+Additions.swift */; };
+		4E7B2DE82448575700812E3F /* ShaderProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B2DE72448575700812E3F /* ShaderProgram.swift */; };
+		4E7B2DEA2448582800812E3F /* Shader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B2DE92448582800812E3F /* Shader.vsh */; };
+		4E7B2DEC2448584600812E3F /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4E7B2DEB2448584600812E3F /* Shader.fsh */; };
 		CA2D3219DA2F13655784B391 /* CaptureDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3F6A589B0F1DE2C81749 /* CaptureDemoUITests.swift */; };
 		CA2D3326257F56C5ADE76E40 /* CaptureDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3B6D30DE47871D7E6150 /* CaptureDemoTests.swift */; };
 		CA2D33791F10F5F77355EC25 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3DFD2D4CCFB8472DD425 /* CameraController.swift */; };
@@ -38,6 +41,9 @@
 
 /* Begin PBXFileReference section */
 		4E635D052446C081001D594B /* AVCaptureDevice+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice+Additions.swift"; sourceTree = "<group>"; };
+		4E7B2DE72448575700812E3F /* ShaderProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderProgram.swift; sourceTree = "<group>"; };
+		4E7B2DE92448582800812E3F /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		4E7B2DEB2448584600812E3F /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
 		CA2D30963BB20AEB090AB034 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		CA2D31354EE30B3DA63A3AE3 /* CaptureDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaptureDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2D331FB72FB9F10688A0C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
@@ -130,6 +136,9 @@
 				CA2D30963BB20AEB090AB034 /* PreviewView.swift */,
 				CA2D3DFD2D4CCFB8472DD425 /* CameraController.swift */,
 				4E635D052446C081001D594B /* AVCaptureDevice+Additions.swift */,
+				4E7B2DE72448575700812E3F /* ShaderProgram.swift */,
+				4E7B2DE92448582800812E3F /* Shader.vsh */,
+				4E7B2DEB2448584600812E3F /* Shader.fsh */,
 			);
 			path = CaptureDemo;
 			sourceTree = "<group>";
@@ -229,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7B2DEC2448584600812E3F /* Shader.fsh in Resources */,
 				CA2D33F9CF986E30739D26FE /* Assets.xcassets in Resources */,
 				CA2D3EA30338880A3B037400 /* LaunchScreen.storyboard in Resources */,
 				CA2D382A07D4F92EE4C6E08D /* Main.storyboard in Resources */,
@@ -264,7 +274,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7B2DEA2448582800812E3F /* Shader.vsh in Sources */,
 				CA2D3CEB9074C2F6FD3CBE13 /* AppDelegate.swift in Sources */,
+				4E7B2DE82448575700812E3F /* ShaderProgram.swift in Sources */,
 				CA2D34FAC672D31D9AE39FCE /* ViewController.swift in Sources */,
 				4E635D062446C081001D594B /* AVCaptureDevice+Additions.swift in Sources */,
 				CA2D3F2F19E87311B96CA09A /* PreviewView.swift in Sources */,
