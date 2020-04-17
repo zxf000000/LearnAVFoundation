@@ -48,8 +48,8 @@ class ShaderProgram {
         glBindAttribLocation(shaderProgram, GLuint(attribute.rawValue), getUnsafePoitner(from: name.utf8CString))
     }
     
-    func uniformIndex(_ uniform: String) -> GLuint {
-        return GLuint(glGetUniformLocation(shaderProgram, getUnsafePoitner(from: uniform.utf8CString)))
+    func uniformIndex(_ uniform: String) -> GLint {
+        return glGetUniformLocation(shaderProgram, getUnsafePoitner(from: uniform.utf8CString))
     }
     
     func compile(shader: inout GLuint, type: GLenum, file: String) -> Bool {
