@@ -45,7 +45,7 @@ class CameraController: NSObject {
     var videoDataOutput: AVCaptureVideoDataOutput!
     var context: CVEAGLContext!
     var textureCache: CVOpenGLESTextureCache!
-    var cameraTexture: CVOpenGLESTexture!
+    var cameraTexture = UnsafeMutablePointer<CVOpenGLESTexture?>.allocate(capacity: 1)
     
     
     convenience init(context: CVEAGLContext) {
@@ -53,6 +53,7 @@ class CameraController: NSObject {
         self.context = context
    
         let err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, self.context, nil, &textureCache)
+        
         if err != kCVReturnSuccess {
             print("error creating texture cache, \(err)")
         }
@@ -164,14 +165,15 @@ class CameraController: NSObject {
             captureSession.addInput(audioInput)
         }
         // setting 放到后面捕捉的时候配置
-        imageOutput = AVCapturePhotoOutput()
-        if captureSession.canAddOutput(imageOutput) {
-            captureSession.addOutput(imageOutput)
-        }
-        movieOutput = AVCaptureMovieFileOutput()
-        if captureSession.canAddOutput(movieOutput) {
-            captureSession.addOutput(movieOutput)
-        }
+//        imageOutput = AVCapturePhotoOutput()
+//        if captureSession.canAddOutput(imageOutput) {
+//            captureSession.addOutput(imageOutput)
+//        }
+        let _ = setupSessionOutput()
+//        movieOutput = AVCaptureMovieFileOutput()
+//        if captureSession.canAddOutput(movieOutput) {
+//            captureSession.addOutput(movieOutput)
+//        }
 
         videoQueue = DispatchQueue(label: "com.videoCaptureDemo.videoQueue")
         return true
@@ -450,19 +452,22 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
         guard let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer) else {return}
         let videoDimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
-        err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, nil, GLenum(GL_TEXTURE_2D), GL_RGBA, videoDimensions.height, videoDimensions.height, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), 0, &cameraTexture)
         
-        if err == nil {
-            let target = CVOpenGLESTextureGetTarget(cameraTexture)
-            let name = CVOpenGLESTextureGetName(cameraTexture)
+        
+        err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, nil, GLenum(GL_TEXTURE_2D), GL_RGBA, videoDimensions.height, videoDimensions.height, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), 0, cameraTexture)
+        
+        if err == kCVReturnSuccess {
+            let target = CVOpenGLESTextureGetTarget(cameraTexture.pointee!)
+            let name = CVOpenGLESTextureGetName(cameraTexture.pointee!)
             textureDelegate.textureCreated(with: target, name: name)
         }
+        
         
         
     }
     
     func cleanTextures() {
-        cameraTexture = nil
+        cameraTexture.deallocate()
         CVOpenGLESTextureCacheFlush(textureCache, 0)
     }
 }

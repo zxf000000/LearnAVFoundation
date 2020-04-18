@@ -5,9 +5,34 @@
 
 import UIKit
 import AVFoundation
+import GLKit
+import OpenGLES.ES2.gl
+import OpenGLES.ES2.glext
 
-class ViewController: UIViewController {
+enum UNIFORM: Int {
+    case UNIFORM_MVP_MATRIX
+    case UNIFORM_TEXTURE
+    case NUM_UNIFORMS
+}
 
+
+extension Array {
+    func size() -> Int {
+        return MemoryLayout<Element>.stride * self.count
+    }
+}
+
+class ViewController: GLKViewController {
+
+    var context: EAGLContext = EAGLContext(api: .openGLES3)!
+  
+    var uniforms: GLint!
+    var shaderProgram: ShaderProgram!
+    var mvpMatrix: GLKMatrix4!
+    var rotation: Float! = 0
+    var vertexArray: GLuint! = GLuint()
+    var vertexBuffer: GLuint! = GLuint()
+    
     var switcher: UISwitch! = UISwitch()
     
     var toolsView: UIView!
@@ -24,14 +49,132 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
     super.viewDidLoad()
         
+        
+        guard let glkView = view as? GLKView else {return}
+        glkView.context = self.context
+        glkView.drawableDepthFormat = GLKViewDrawableDepthFormat.format24
+        setupGL()
+        
+        self.delegate = self
+        cameraControl = CameraController(context: context)
 
+        let bounds = view.bounds
+        let aspect = fabs(bounds.width / bounds.height)
+        let projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(50), Float(aspect), 0.1, 100)
+        var modelViewMatrix = GLKMatrix4MakeTranslation(0, 0, -3.5)
+        modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, rotation, 1, 1, 1)
+        mvpMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix)
+        rotation += Float(timeSinceLastUpdate * 0.75)
 
-
-        setupUI()
+//        setupUI()
         
         tapStartButton()
     }
+    
+    func setupGL()  {
+        let cubeVertices: [GLfloat] = [
+            //  Position                 Normal                  Texture
+             // x,    y,     z           x,    y,    z           s,    t
+                0.50, -0.50, -0.50,      1.00, 0.00, 0.00,       1.00, 1.00,
+                0.50,  0.50, -0.50,      1.00, 0.00, 0.00,       1.00, 0.00,
+                0.50, -0.50,  0.50,      1.00, 0.00, 0.00,       0.00, 1.00,
+                0.50, -0.50,  0.50,      1.00, 0.00, 0.00,       0.00, 1.00,
+                0.50,  0.50, -0.50,      1.00, 0.00, 0.00,       1.00, 0.00,
+                0.50,  0.50,  0.50,      1.00, 0.00, 0.00,       0.00, 0.00,
 
+                0.50, 0.50, -0.50,       0.00, 1.00, 0.00,       1.00, 0.00,
+               -0.50, 0.50, -0.50,       0.00, 1.00, 0.00,       0.00, 0.00,
+                0.50, 0.50,  0.50,       0.00, 1.00, 0.00,       1.00, 1.00,
+                0.50, 0.50,  0.50,       0.00, 1.00, 0.00,       1.00, 1.00,
+               -0.50, 0.50, -0.50,       0.00, 1.00, 0.00,       0.00, 0.00,
+               -0.50, 0.50,  0.50,       0.00, 1.00, 0.00,       0.00, 1.00,
+
+               -0.50,  0.50, -0.50,     -1.00, 0.00, 0.00,       0.00, 1.00,
+               -0.50, -0.50, -0.50,     -1.00, 0.00, 0.00,       1.00, 1.00,
+               -0.50,  0.50,  0.50,     -1.00, 0.00, 0.00,       0.00, 0.00,
+               -0.50,  0.50,  0.50,     -1.00, 0.00, 0.00,       0.00, 0.00,
+               -0.50, -0.50, -0.50,     -1.00, 0.00, 0.00,       1.00, 1.00,
+               -0.50, -0.50,  0.50,     -1.00, 0.00, 0.00,       1.00, 0.00,
+
+               -0.50, -0.50, -0.50,      0.00, -1.00, 0.00,      1.00, 0.00,
+                0.50, -0.50, -0.50,      0.00, -1.00, 0.00,      0.00, 0.00,
+               -0.50, -0.50,  0.50,      0.00, -1.00, 0.00,      1.00, 1.00,
+               -0.50, -0.50,  0.50,      0.00, -1.00, 0.00,      1.00, 1.00,
+                0.50, -0.50, -0.50,      0.00, -1.00, 0.00,      0.00, 0.00,
+                0.50, -0.50,  0.50,      0.00, -1.00, 0.00,      0.00, 1.00,
+
+                0.50,  0.50, 0.50,       0.00, 0.00, 1.00,       0.00, 0.00,
+               -0.50,  0.50, 0.50,       0.00, 0.00, 1.00,       0.00, 1.00,
+                0.50, -0.50, 0.50,       0.00, 0.00, 1.00,       1.00, 0.00,
+                0.50, -0.50, 0.50,       0.00, 0.00, 1.00,       1.00, 0.00,
+               -0.50,  0.50, 0.50,       0.00, 0.00, 1.00,       0.00, 1.00,
+               -0.50, -0.50, 0.50,       0.00, 0.00, 1.00,       1.00, 1.00,
+
+                0.50, -0.50, -0.50,      0.00, 0.00, -1.00,      0.00, 1.00,
+               -0.50, -0.50, -0.50,      0.00, 0.00, -1.00,      1.00, 1.00,
+                0.50,  0.50, -0.50,      0.00, 0.00, -1.00,      0.00, 0.00,
+                0.50,  0.50, -0.50,      0.00, 0.00, -1.00,      0.00, 0.00,
+               -0.50, -0.50, -0.50,      0.00, 0.00, -1.00,      1.00, 1.00,
+               -0.50,  0.50, -0.50,      0.00, 0.00, -1.00,      1.00, 0.00
+        ]
+        
+        EAGLContext.setCurrent(self.context)
+        shaderProgram = ShaderProgram(shaderName: "Shader")
+        shaderProgram.addVertexAttribute(attribute: GLKVertexAttrib.position, name: "position")
+        shaderProgram.addVertexAttribute(attribute: GLKVertexAttrib.texCoord0, name: "videoTextureCoordinate")
+        let result = shaderProgram.linkProgram()
+        if !result {
+            return
+        }
+        uniforms = shaderProgram.uniformIndex("mvpMatrix")
+        glEnable(GLenum(GL_DEPTH_TEST))
+        
+        glGenVertexArraysOES(1, &vertexArray)
+        glBindVertexArrayOES(vertexArray)
+        
+        glGenBuffers(1, &vertexBuffer)
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
+        glBufferData(GLenum(GL_ARRAY_BUFFER), cubeVertices.size(), cubeVertices, GLenum(GL_STATIC_DRAW))
+        
+        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.position.rawValue))
+        glVertexAttribPointer(GLuint(GLKVertexAttrib.position.rawValue),
+                              3,
+                              GLenum(GL_FLOAT),
+                              GLboolean(GL_FALSE),
+                              Int32(MemoryLayout<GLfloat>.size) * 8,
+                              UnsafeRawPointer.init(bitPattern: 0))
+        
+        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.normal.rawValue))
+        glVertexAttribPointer(GLuint(GLKVertexAttrib.normal.rawValue),
+                              3,
+                              GLenum(GL_FLOAT),
+                              GLboolean(GL_FALSE),
+                              Int32(MemoryLayout<GLfloat>.size) * 8,
+                              UnsafeRawPointer.init(bitPattern: MemoryLayout<GLfloat>.size * 3))
+        
+        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
+        glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue),
+                              2,
+                              GLenum(GL_FLOAT),
+                              GLboolean(GL_FALSE),
+                              Int32(MemoryLayout<GLfloat>.size) * 8,
+                              UnsafeRawPointer.init(bitPattern:  MemoryLayout<GLfloat>.size * 6))
+        
+            
+        
+        
+    }
+
+    func update() {
+        let bounds = view.bounds
+        let aspect = fabs(bounds.width / bounds.height)
+        let projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(50), Float(aspect), 0.1, 100)
+        var modelViewMatrix = GLKMatrix4MakeTranslation(0, 0, -3.5)
+        modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, rotation, 1, 1, 1)
+        mvpMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix)
+        rotation += Float(timeSinceLastUpdate * 0.75)
+    }
+    
     func setupUI() {
         
         previewView = PreviewView()
@@ -104,11 +247,11 @@ class ViewController: UIViewController {
 
     @objc
     func tapStartButton() {
-        cameraControl = CameraController()
         cameraControl.delegate = self
+        cameraControl.textureDelegate = self
         do {
             let _ = try cameraControl.setupSession()
-            previewView.session = cameraControl.captureSession
+//            previewView.session = cameraControl.captureSession
             cameraControl.startSession()
 
         } catch {
@@ -136,7 +279,38 @@ class ViewController: UIViewController {
         }
     }
 
+    override func glkView(_ view: GLKView, drawIn rect: CGRect) {
+        glClearColor(0.2, 0.2, 0.2, 1)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
+        glBindVertexArray(vertexArray)
+        shaderProgram.useProgress()
+        
+        if uniforms != nil {
+            
+            let v = withUnsafePointer(to: &(mvpMatrix.m00), {$0})
+            
+            glUniform4fv(uniforms, 1, v)
+            glUniform1i(uniforms, 0)
+            glDrawArrays(GLenum(GL_TRIANGLES), 0, 36)
+            
+        }
 
+    }
+
+}
+
+extension ViewController: GLKViewControllerDelegate {
+    func glkViewControllerUpdate(_ controller: GLKViewController) {
+        let bounds = view.bounds
+        let aspect = fabs(bounds.width / bounds.height)
+        let projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(50), Float(aspect), 0.1, 100)
+        var modelViewMatrix = GLKMatrix4MakeTranslation(0, 0, -3.5)
+        modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, rotation, 1, 1, 1)
+        mvpMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix)
+        rotation += Float(timeSinceLastUpdate * 0.75)
+    }
+    
+    
 }
 
 extension ViewController: CameraControllerDelegate {
@@ -150,4 +324,20 @@ extension ViewController: CameraControllerDelegate {
     func assetLibraryWriteFailed(with error: Error?) {
         print("assetLibraryWriteFailed")        
     }
+    
+    
+    
+}
+
+extension ViewController: TextureDelegate {
+    func textureCreated(with target: GLenum, name: GLuint) {
+        glActiveTexture(GLenum(GL_TEXTURE0))
+        glBindTexture(target, name)
+        
+        glTexParameterf(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GLfloat(GL_CLAMP_TO_EDGE))
+        glTexParameterf(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GLfloat(GL_CLAMP_TO_EDGE))
+
+    }
+    
+
 }
