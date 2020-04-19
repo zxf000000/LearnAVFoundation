@@ -16,8 +16,10 @@
 		4E9BD7A9244AC84E00499E18 /* OpenGLESDemo_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9BD7A8244AC84E00499E18 /* OpenGLESDemo_2UITests.swift */; };
 		4E9BD7B8244AC8D800499E18 /* AGLKContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9BD7B7244AC8D800499E18 /* AGLKContext.swift */; };
 		4E9BD7BA244ACAA700499E18 /* AGLKVertexAttribArrayBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9BD7B9244ACAA700499E18 /* AGLKVertexAttribArrayBuffer.swift */; };
-		4E9BD7FA244B1EAE00499E18 /* test.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4E9BD7F9244B1EAE00499E18 /* test.jpeg */; };
 		4E9BD7FC244B25AD00499E18 /* AGLKTextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9BD7FB244B25AD00499E18 /* AGLKTextureLoader.swift */; };
+		B768FC0A244C4DFF0094DCCD /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B768FC09244C4DFF0094DCCD /* test.jpg */; };
+		B768FC0C244C4EB20094DCCD /* ErrorHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B768FC0B244C4EB20094DCCD /* ErrorHelp.swift */; };
+		B768FC0E244C579B0094DCCD /* leaves.gif in Resources */ = {isa = PBXBuildFile; fileRef = B768FC0D244C579B0094DCCD /* leaves.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +55,10 @@
 		4E9BD7AA244AC84E00499E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E9BD7B7244AC8D800499E18 /* AGLKContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGLKContext.swift; sourceTree = "<group>"; };
 		4E9BD7B9244ACAA700499E18 /* AGLKVertexAttribArrayBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGLKVertexAttribArrayBuffer.swift; sourceTree = "<group>"; };
-		4E9BD7F9244B1EAE00499E18 /* test.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpeg; sourceTree = "<group>"; };
 		4E9BD7FB244B25AD00499E18 /* AGLKTextureLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGLKTextureLoader.swift; sourceTree = "<group>"; };
+		B768FC09244C4DFF0094DCCD /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
+		B768FC0B244C4EB20094DCCD /* ErrorHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelp.swift; sourceTree = "<group>"; };
+		B768FC0D244C579B0094DCCD /* leaves.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = leaves.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +109,8 @@
 		4E9BD785244AC84C00499E18 /* OpenGLESDemo_2 */ = {
 			isa = PBXGroup;
 			children = (
-				4E9BD7F9244B1EAE00499E18 /* test.jpeg */,
+				B768FC0D244C579B0094DCCD /* leaves.gif */,
+				B768FC09244C4DFF0094DCCD /* test.jpg */,
 				4E9BD7B6244AC8C800499E18 /* Sources */,
 				4E9BD786244AC84C00499E18 /* AppDelegate.swift */,
 				4E9BD78A244AC84C00499E18 /* ViewController.swift */,
@@ -141,6 +146,7 @@
 				4E9BD7B7244AC8D800499E18 /* AGLKContext.swift */,
 				4E9BD7B9244ACAA700499E18 /* AGLKVertexAttribArrayBuffer.swift */,
 				4E9BD7FB244B25AD00499E18 /* AGLKTextureLoader.swift */,
+				B768FC0B244C4EB20094DCCD /* ErrorHelp.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -250,7 +256,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E9BD793244AC84E00499E18 /* LaunchScreen.storyboard in Resources */,
-				4E9BD7FA244B1EAE00499E18 /* test.jpeg in Resources */,
+				B768FC0E244C579B0094DCCD /* leaves.gif in Resources */,
+				B768FC0A244C4DFF0094DCCD /* test.jpg in Resources */,
 				4E9BD790244AC84E00499E18 /* Assets.xcassets in Resources */,
 				4E9BD78E244AC84C00499E18 /* Main.storyboard in Resources */,
 			);
@@ -280,6 +287,7 @@
 				4E9BD7BA244ACAA700499E18 /* AGLKVertexAttribArrayBuffer.swift in Sources */,
 				4E9BD7B8244AC8D800499E18 /* AGLKContext.swift in Sources */,
 				4E9BD78B244AC84C00499E18 /* ViewController.swift in Sources */,
+				B768FC0C244C4EB20094DCCD /* ErrorHelp.swift in Sources */,
 				4E9BD787244AC84C00499E18 /* AppDelegate.swift in Sources */,
 				4E9BD7FC244B25AD00499E18 /* AGLKTextureLoader.swift in Sources */,
 			);

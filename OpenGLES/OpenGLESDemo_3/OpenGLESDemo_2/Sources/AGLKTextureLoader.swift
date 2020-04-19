@@ -42,55 +42,72 @@ class AGLKTextLoader {
     private var target: GLenum?
     private var width: GLuint?
     private var height: GLuint?
-    
-    
-    
-    
-    static func textureInfo(with cgImage: CGImage, options: Dictionary<String, Any>) -> AGLKTextureInfo {
+
+    static func textureInfo(with cgImage: CGImage, options: Dictionary<String, Any>?) -> AGLKTextureInfo {
         var width: size_t = 0
         var height: size_t = 0
         let widthPtr = withUnsafeMutablePointer(to: &width, {$0})
         let heightPtr = withUnsafeMutablePointer(to: &height, {$0})
         let imageData = AGLKDataWithResizedCGImageBytes(cgImage: cgImage, widthPtr: widthPtr, heightPtr: heightPtr)
-        var textureBufferID: GLuint = 0
+        var textureBufferID: GLuint = GLuint()
+        glCheckError()
         glGenTextures(1, &textureBufferID)
-        glBindBuffer(GLenum(GL_TEXTURE_2D), textureBufferID)
-        
-        let bytes = UnsafeMutableRawBufferPointer(start: UnsafeMutableRawPointer(bitPattern: 0), count: imageData.count)
-        
-        imageData.copyBytes(to: bytes)
-        
-        glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), bytes as? UnsafeRawPointer)
-        
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
-        let result = AGLKTextureInfo(name: textureBufferID, target: GLenum(GL_TEXTURE_2D), width: width, height: height)
+        glBindTexture(GLenum(GL_TEXTURE_2D), textureBufferID)
+        glCheckError()
+        let bytes = imageData.withUnsafeBytes({$0})
+        glCheckError()
+        glTexImage2D(GLenum(GL_TEXTURE_2D),
+                     0,
+                     GL_RGBA,
+                     GLsizei(width),
+                     GLsizei(height),
+                     0,
+                     GLenum(GL_RGBA),
+                     GLenum(GL_UNSIGNED_BYTE),
+                     bytes.baseAddress)
+        glCheckError()
+        // pname 参数
+//        public var GL_TEXTURE_MAG_FILTER: Int32 { get }
+//        public var GL_TEXTURE_MIN_FILTER: Int32 { get }
+//        public var GL_TEXTURE_WRAP_S: Int32 { get }
+//        public var GL_TEXTURE_WRAP_T: Int32 { get }
+//        public var GL_GENERATE_MIPMAP: Int32 { get }
+        glTexParameteri(GLenum(GL_TEXTURE_2D),
+                        GLenum(GL_TEXTURE_MIN_FILTER),
+                        GL_NEAREST)
+        glCheckError()
+        let result = AGLKTextureInfo(name: textureBufferID,
+                                     target: GLenum(GL_TEXTURE_2D),
+                                     width: width,
+                                     height: height)
+        glCheckError()
         return result
     }
 }
 
 
-func AGLKCaculatePowerOf2ForDiemnsion(dimension: GLuint) -> AGLKPowerOf2 {
-    var result: AGLKPowerOf2 = AGLKPowerOf2.AGLK1
+func AGLKCaculatePowerOf2ForDiemnsion(dimension: GLuint) -> AGLKPowerOf2.RawValue {
+    var result: AGLKPowerOf2.RawValue = AGLKPowerOf2.AGLK1.rawValue
     if dimension > 512 {
-        result = .AGLK1024
+        result = AGLKPowerOf2.AGLK1024.rawValue
     } else if dimension > 256 {
-        result = .AGLK512
+        result = AGLKPowerOf2.AGLK512.rawValue
     } else if dimension > 128 {
-        result = .AGLK256
+        result = AGLKPowerOf2.AGLK256.rawValue
     } else if dimension > 64 {
-        result = .AGLK128
+        result = AGLKPowerOf2.AGLK128.rawValue
     } else if dimension > 32 {
-        result = .AGLK64
+        result = AGLKPowerOf2.AGLK64.rawValue
     } else if dimension > 16 {
-        result = .AGLK32
+        result = AGLKPowerOf2.AGLK32.rawValue
     } else if dimension > 8 {
-        result = .AGLK16
+        result = AGLKPowerOf2.AGLK16.rawValue
     } else if dimension > 4 {
-        result = .AGLK8
+        result = AGLKPowerOf2.AGLK8.rawValue
     } else if dimension > 2 {
-        result = .AGLK4
+        result = AGLKPowerOf2.AGLK4.rawValue
     } else if dimension > 1 {
-        result = .AGLK2
+        result = AGLKPowerOf2.AGLK2.rawValue
     }
     return result
 }
@@ -101,17 +118,25 @@ func AGLKDataWithResizedCGImageBytes(cgImage: CGImage, widthPtr: UnsafeMutablePo
     
     let width = AGLKCaculatePowerOf2ForDiemnsion(dimension: GLuint(originWidth))
     let height = AGLKCaculatePowerOf2ForDiemnsion(dimension: GLuint(originHeight))
-    var imageData = Data(capacity: width.rawValue * height.rawValue)
+
+//    var data = Data(count: width.rawValue * height.rawValue * 4)
     
+    var data = Data(count: width * height * 4)
+    let unsafeMutablePoint = data.withUnsafeMutableBytes({$0})
+//    var data = NSMutableData(length: width * height * 4)
     let colorSpace = CGColorSpaceCreateDeviceRGB()
-    let context = CGContext(data: &imageData, width: width.rawValue, height: height.rawValue, bitsPerComponent: 8, bytesPerRow: 4 * width.rawValue, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+//    let bytes = data.withUnsafeMutableBytes({($0[0])})
+    guard let context = CGContext(data: unsafeMutablePoint.baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 4 * width, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {return Data()}
     
-    context?.ctm.translatedBy(x: 0, y: CGFloat(height.rawValue))
-    context?.ctm.scaledBy(x: 1, y: -1)
-    context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: width.rawValue, height: height.rawValue))
     
-    widthPtr.pointee = width.rawValue
-    heightPtr.pointee = height.rawValue
+    context.ctm.translatedBy(x: 0, y: CGFloat(height))
+    context.ctm.scaledBy(x: 1, y: -1)
+    let rect = CGRect(x: 0, y: 0, width: width, height: height)
+    context.draw(cgImage, in: rect)
     
-    return imageData
+    widthPtr.pointee = width
+    heightPtr.pointee = height
+    
+    return data as! Data
+//    return (data?.copy() ?? Data()) as Data
 }
