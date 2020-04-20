@@ -31,7 +31,7 @@ class ViewController: GLKViewController {
     let baseEffect: GLKBaseEffect = GLKBaseEffect()
     
     let vertices = [
-        SenceVertex(positionCoords: GLKVector3Make(-0.5, -0.5, 0),
+        SenceVertex(positionCoords: GLKVector3Make(-0.5, -0.5, -0.5),
                     textureCoords: GLKVector2Make(0.0, 0.0)),
         SenceVertex(positionCoords: GLKVector3Make(0.5, -0.5, 0),
                     textureCoords: GLKVector2Make(1.0, 0.0)),
@@ -63,6 +63,12 @@ class ViewController: GLKViewController {
         let textureInfo = AGLKTextLoader.textureInfo(with: imageRef, options: nil)
         baseEffect.texture2d0.name = textureInfo.name ?? 0
         baseEffect.texture2d0.target = GLKTextureTarget(rawValue: textureInfo.target ?? 0)!
+        
+        baseEffect.light0.enabled = GLboolean(GL_TRUE)
+//        baseEffect.light0.ambientColor = GLKVector4Make(0.5, 1, 1, 1)
+//        baseEffect.light0.diffuseColor = GLKVector4Make(1, 1, 1, 0.5)
+        baseEffect.light0.specularColor = GLKVector4Make(1, 1, 1, 1)
+        baseEffect.light0.position = GLKVector4Make(0, 1, 0.5, 0)
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
