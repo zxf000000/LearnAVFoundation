@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ypb-bz-Bwb">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="OZV-el-Soz">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ypb-bz-Bwb" customClass="ViewController" customModule="OpenGLESDemo_2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A9G-qg-4DR" customClass="GLKView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-oj-RE5">
+                                <rect key="frame" x="120" y="707" width="80" height="32"/>
+                                <segments>
+                                    <segment title="x"/>
+                                    <segment title="y"/>
+                                    <segment title="z"/>
+                                </segments>
+                                <connections>
+                                    <action selector="takeTransform2AxisFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="dW6-Fn-tXA"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bgC-Gb-q5f">
+                                <rect key="frame" x="121" y="746" width="80" height="32"/>
+                                <segments>
+                                    <segment title="x"/>
+                                    <segment title="y"/>
+                                    <segment title="z"/>
+                                </segments>
+                                <connections>
+                                    <action selector="takeTransform3AxisFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="wfy-T8-mqf"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z8p-rh-H8y">
+                                <rect key="frame" x="10" y="668" width="77" height="32"/>
+                                <segments>
+                                    <segment title="t"/>
+                                    <segment title="r"/>
+                                    <segment title="s"/>
+                                </segments>
+                                <connections>
+                                    <action selector="takeTransform1TypeFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="PNs-zx-8er"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bD0-j6-uXL">
+                                <rect key="frame" x="10" y="746" width="77" height="32"/>
+                                <segments>
+                                    <segment title="t"/>
+                                    <segment title="r"/>
+                                    <segment title="s"/>
+                                </segments>
+                                <connections>
+                                    <action selector="takeTransform3TypeFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="EPV-VQ-oez"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-mj-ExB">
+                                <rect key="frame" x="28" y="707" width="77" height="32"/>
+                                <segments>
+                                    <segment title="t"/>
+                                    <segment title="r"/>
+                                    <segment title="s"/>
+                                </segments>
+                                <connections>
+                                    <action selector="takeTransform2TypeFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="wkP-C0-qIx"/>
+                                </connections>
+                            </segmentedControl>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="upr-kd-F3t">
+                                <rect key="frame" x="190" y="668.5" width="206" height="31"/>
+                                <connections>
+                                    <action selector="takeTransform1ValueFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="bTL-wl-vw1"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yfp-tS-QBc">
+                                <rect key="frame" x="190" y="707.5" width="206" height="31"/>
+                                <connections>
+                                    <action selector="takeTransform2ValueFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="Z8X-Ct-gfx"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZLf-Y1-rMm">
+                                <rect key="frame" x="190" y="746.5" width="206" height="31"/>
+                                <connections>
+                                    <action selector="takeTransform3ValueFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="TkQ-qp-Sdn"/>
+                                </connections>
+                            </slider>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Vbl-bm-a4b">
+                                <rect key="frame" x="95" y="668" width="80" height="32"/>
+                                <segments>
+                                    <segment title="x"/>
+                                    <segment title="y"/>
+                                    <segment title="z"/>
+                                </segments>
+                                <connections>
+                                    <action selector="takeTransform1AxisFrom:" destination="ypb-bz-Bwb" eventType="valueChanged" id="qvj-gw-9UE"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2UL-mj-ExB" firstAttribute="top" secondItem="z8p-rh-H8y" secondAttribute="bottom" constant="8" id="0Xt-9v-sNg"/>
+                            <constraint firstItem="ZLf-Y1-rMm" firstAttribute="centerY" secondItem="bgC-Gb-q5f" secondAttribute="centerY" id="4Ke-ez-0Cm"/>
+                            <constraint firstItem="yfp-tS-QBc" firstAttribute="centerY" secondItem="R5P-oj-RE5" secondAttribute="centerY" id="7Fd-eV-d0H"/>
+                            <constraint firstItem="upr-kd-F3t" firstAttribute="centerY" secondItem="Vbl-bm-a4b" secondAttribute="centerY" id="8Af-HZ-A4W"/>
+                            <constraint firstItem="ZLf-Y1-rMm" firstAttribute="trailing" secondItem="yfp-tS-QBc" secondAttribute="trailing" id="BBH-3z-YRG"/>
+                            <constraint firstItem="0Kg-cK-PSN" firstAttribute="trailing" secondItem="upr-kd-F3t" secondAttribute="trailing" constant="20" id="Ef4-oR-DlJ"/>
+                            <constraint firstItem="bgC-Gb-q5f" firstAttribute="bottom" secondItem="bD0-j6-uXL" secondAttribute="bottom" id="GcJ-P8-tnE"/>
+                            <constraint firstItem="yfp-tS-QBc" firstAttribute="leading" secondItem="upr-kd-F3t" secondAttribute="leading" id="HwM-Oq-9hs"/>
+                            <constraint firstItem="yfp-tS-QBc" firstAttribute="trailing" secondItem="upr-kd-F3t" secondAttribute="trailing" id="OTd-fU-KZ3"/>
+                            <constraint firstItem="bD0-j6-uXL" firstAttribute="top" secondItem="2UL-mj-ExB" secondAttribute="bottom" constant="8" id="Sno-CJ-XPF"/>
+                            <constraint firstItem="bD0-j6-uXL" firstAttribute="leading" secondItem="2UL-mj-ExB" secondAttribute="leading" id="Th2-N1-BHL"/>
+                            <constraint firstItem="R5P-oj-RE5" firstAttribute="bottom" secondItem="2UL-mj-ExB" secondAttribute="bottom" id="U0c-D7-ZuE"/>
+                            <constraint firstItem="Vbl-bm-a4b" firstAttribute="bottom" secondItem="z8p-rh-H8y" secondAttribute="bottom" id="UKR-ra-ugq"/>
+                            <constraint firstItem="2UL-mj-ExB" firstAttribute="leading" secondItem="z8p-rh-H8y" secondAttribute="leading" id="XF4-Fu-Jaz"/>
+                            <constraint firstItem="bgC-Gb-q5f" firstAttribute="leading" secondItem="R5P-oj-RE5" secondAttribute="leading" id="XJj-89-m9b"/>
+                            <constraint firstItem="0Kg-cK-PSN" firstAttribute="bottom" secondItem="bD0-j6-uXL" secondAttribute="bottom" constant="85" id="Zvy-E9-ReR"/>
+                            <constraint firstItem="Vbl-bm-a4b" firstAttribute="leading" secondItem="z8p-rh-H8y" secondAttribute="trailing" constant="8" id="nTC-qo-MLG"/>
+                            <constraint firstItem="upr-kd-F3t" firstAttribute="leading" secondItem="Vbl-bm-a4b" secondAttribute="trailing" constant="17" id="wYq-OM-iTb"/>
+                            <constraint firstItem="R5P-oj-RE5" firstAttribute="leading" secondItem="Vbl-bm-a4b" secondAttribute="leading" id="z9E-wc-lmw"/>
+                            <constraint firstItem="ZLf-Y1-rMm" firstAttribute="leading" secondItem="yfp-tS-QBc" secondAttribute="leading" id="zZz-Hj-bK7"/>
+                            <constraint firstItem="z8p-rh-H8y" firstAttribute="leading" secondItem="0Kg-cK-PSN" secondAttribute="leading" constant="10" id="zjW-uX-FMq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0Kg-cK-PSN"/>
+                    </view>
+                    <connections>
+                        <outlet property="transform1ValueSlider" destination="upr-kd-F3t" id="tt6-al-1dG"/>
+                        <outlet property="transform2ValueSlider" destination="yfp-tS-QBc" id="qSs-Mz-dn3"/>
+                        <outlet property="transform3ValueSlider" destination="ZLf-Y1-rMm" id="dwO-78-vs9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ka8-1F-xUk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="644.92753623188412" y="14.732142857142856"/>
+        </scene>
+    </scenes>
+</document>

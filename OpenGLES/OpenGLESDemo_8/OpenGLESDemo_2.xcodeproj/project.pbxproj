@@ -11,7 +11,7 @@
 		4E76EEDF244D7A0700CF1FB2 /* LightingDetail256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E76EEDD244D7A0700CF1FB2 /* LightingDetail256x256.png */; };
 		4E76EEE0244D7A0700CF1FB2 /* Lighting256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E76EEDE244D7A0700CF1FB2 /* Lighting256x256.png */; };
 		4E76EEE3244D826900CF1FB2 /* Earth512x256.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E76EEE2244D826900CF1FB2 /* Earth512x256.jpg */; };
-		4E76EEE5244D843700CF1FB2 /* sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76EEE4244D843700CF1FB2 /* sphere.swift */; };
+		4E76EEE7244DA10B00CF1FB2 /* lowPolyAxesAndModels2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76EEE6244D99C800CF1FB2 /* lowPolyAxesAndModels2.swift */; };
 		4E9BD787244AC84C00499E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9BD786244AC84C00499E18 /* AppDelegate.swift */; };
 		4E9BD78B244AC84C00499E18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9BD78A244AC84C00499E18 /* ViewController.swift */; };
 		4E9BD78E244AC84C00499E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E9BD78C244AC84C00499E18 /* Main.storyboard */; };
@@ -55,7 +55,7 @@
 		4E76EEDD244D7A0700CF1FB2 /* LightingDetail256x256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightingDetail256x256.png; sourceTree = "<group>"; };
 		4E76EEDE244D7A0700CF1FB2 /* Lighting256x256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lighting256x256.png; sourceTree = "<group>"; };
 		4E76EEE2244D826900CF1FB2 /* Earth512x256.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Earth512x256.jpg; sourceTree = "<group>"; };
-		4E76EEE4244D843700CF1FB2 /* sphere.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sphere.swift; sourceTree = "<group>"; };
+		4E76EEE6244D99C800CF1FB2 /* lowPolyAxesAndModels2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lowPolyAxesAndModels2.swift; sourceTree = "<group>"; };
 		4E9BD783244AC84C00499E18 /* OpenGLESDemo_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGLESDemo_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E9BD786244AC84C00499E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E9BD78A244AC84C00499E18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		B768FC11244C7B820094DCCD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4E76EEE4244D843700CF1FB2 /* sphere.swift */,
+				4E76EEE6244D99C800CF1FB2 /* lowPolyAxesAndModels2.swift */,
 				4E76EEE2244D826900CF1FB2 /* Earth512x256.jpg */,
 				B768FC12244C7B820094DCCD /* OpenGL_ES_for_iOS_72x72.png */,
 				B768FC13244C7B820094DCCD /* leaves.gif */,
@@ -337,8 +337,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E9BD7BA244ACAA700499E18 /* AGLKVertexAttribArrayBuffer.swift in Sources */,
-				4E76EEE5244D843700CF1FB2 /* sphere.swift in Sources */,
 				4E9BD7B8244AC8D800499E18 /* AGLKContext.swift in Sources */,
+				4E76EEE7244DA10B00CF1FB2 /* lowPolyAxesAndModels2.swift in Sources */,
 				4E9BD78B244AC84C00499E18 /* ViewController.swift in Sources */,
 				4E76EED7244D542200CF1FB2 /* AGLKTextureLoader.swift in Sources */,
 				B768FC21244C7D3E0094DCCD /* ErrorHelp.swift in Sources */,
