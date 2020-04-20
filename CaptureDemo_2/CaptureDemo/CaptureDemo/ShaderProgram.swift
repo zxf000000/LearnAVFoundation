@@ -23,24 +23,22 @@ class ShaderProgram {
     
     init(shaderName: String) {
         shaderProgram = glCreateProgram()
-        
-        guard let vertShaderPath = path(for: shaderName, type: "vsh") else { return }
+        let vertShaderPath = path(for: shaderName, type: "vsh")
         if !compile(shader: &verShader, type: GLenum(GL_VERTEX_SHADER), file: vertShaderPath) {
             print("failed")
         }
-        guard let fragShaderPath = path(for: shaderName, type: "fsh") else { return }
+        let fragShaderPath = path(for: shaderName, type: "fsh")
         if !compile(shader: &fragShader, type: GLenum(GL_FRAGMENT_SHADER), file: fragShaderPath) {
             print("failed")
         }
-        
         glAttachShader(shaderProgram, verShader)
         glAttachShader(shaderProgram, fragShader)
-        
+
     }
     
     
-    func path(for name: String, type: String) -> String? {
-        return Bundle.main.path(forResource: name, ofType: type)
+    func path(for name: String, type: String?) -> String {
+        return Bundle.main.path(forResource: name, ofType: type) ?? ""
     }
     
     func addVertexAttribute(attribute: GLKVertexAttrib, name: String) {
@@ -53,19 +51,34 @@ class ShaderProgram {
     }
     
     func compile(shader: inout GLuint, type: GLenum, file: String) -> Bool {
-        var status: GLint? = nil
+        var status: GLint = GLint()
         
         do {
-            let source = try String(contentsOfFile: file, encoding: .utf8).utf8CString
+            let source = try String(contentsOfFile: file, encoding: .utf8)
             
-            guard var first = source.first else {return false}
-            var pointer: UnsafePointer<GLchar>? = withUnsafePointer(to: &first, {$0})
-            
+            var cStringSource = (source as NSString).utf8String
+                        
             shader = glCreateShader(type)
-            glShaderSource(shader, 1, &pointer, nil)
+            glCheckError()
+            glShaderSource(shader, 1, &cStringSource, nil)
+            glCheckError()
             glCompileShader(shader)
+            glCheckError()
+
             
-            glGetShaderiv(shader, GLenum(GL_COMPILE_STATUS), &(status)!)
+            var logLength = GLint()
+            glGetShaderiv(shader, GLenum(GL_INFO_LOG_LENGTH), &logLength)
+            if (logLength > 0) {
+                let log = UnsafeMutablePointer<GLchar>.allocate(capacity: Int(logLength))
+                glGetShaderInfoLog(shader, logLength, &logLength, log)
+                
+                print("Shader compile log: \(String(cString: log, encoding: .utf8)))")
+                
+                free(log)
+            }
+            
+            glGetShaderiv(shader, GLenum(GL_COMPILE_STATUS), &status)
+
             if status == 0 {
                 glDeleteShader(shader)
                 return false

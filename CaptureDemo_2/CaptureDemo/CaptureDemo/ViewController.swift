@@ -22,6 +22,13 @@ extension Array {
     }
 }
 
+struct SceneVertex {
+    var position: GLKVector3
+    var normal: GLKVector3
+    var texture: GLKVector2
+}
+
+
 class ViewController: GLKViewController {
 
     var context: EAGLContext = EAGLContext(api: .openGLES3)!
@@ -38,7 +45,6 @@ class ViewController: GLKViewController {
     var toolsView: UIView!
     var slider: UISlider!
     var button: UIButton = UIButton()
-    var previewView: PreviewView!
     
     var cameraControl: CameraController!
     
@@ -72,7 +78,7 @@ class ViewController: GLKViewController {
     }
     
     func setupGL()  {
-        let cubeVertices: [GLfloat] = [
+        let cubeVertices1: [GLfloat] = [
             //  Position                 Normal                  Texture
              // x,    y,     z           x,    y,    z           s,    t
                 0.50, -0.50, -0.50,      1.00, 0.00, 0.00,       1.00, 1.00,
@@ -118,6 +124,16 @@ class ViewController: GLKViewController {
                -0.50,  0.50, -0.50,      0.00, 0.00, -1.00,      1.00, 0.00
         ]
         
+        var vertices = [SceneVertex]()
+        var tempArr = [GLfloat]()
+        for i in 0..<cubeVertices1.count {
+            tempArr.append(cubeVertices1[i])
+            if tempArr.count == 8 {
+                vertices.append(SceneVertex(position: GLKVector3Make(tempArr[0], tempArr[1], tempArr[2]), normal: GLKVector3Make(tempArr[3], tempArr[4], tempArr[5]), texture: GLKVector2Make(tempArr[6], tempArr[7])))
+                tempArr = [GLfloat]()
+            }
+        }
+        
         EAGLContext.setCurrent(self.context)
         shaderProgram = ShaderProgram(shaderName: "Shader")
         shaderProgram.addVertexAttribute(attribute: GLKVertexAttrib.position, name: "position")
@@ -132,54 +148,48 @@ class ViewController: GLKViewController {
         glGenVertexArraysOES(1, &vertexArray)
         glBindVertexArrayOES(vertexArray)
         
+        
         glGenBuffers(1, &vertexBuffer)
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
-        glBufferData(GLenum(GL_ARRAY_BUFFER), cubeVertices.size(), cubeVertices, GLenum(GL_STATIC_DRAW))
+        glBufferData(GLenum(GL_ARRAY_BUFFER),
+                     vertices.size(),
+                     vertices,
+                     GLenum(GL_STATIC_DRAW))
         
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.position.rawValue))
         glVertexAttribPointer(GLuint(GLKVertexAttrib.position.rawValue),
                               3,
                               GLenum(GL_FLOAT),
                               GLboolean(GL_FALSE),
-                              Int32(MemoryLayout<GLfloat>.size) * 8,
+                              GLsizei(MemoryLayout<SceneVertex>.stride),
                               UnsafeRawPointer.init(bitPattern: 0))
         
+        var offset = MemoryLayout.offset(of: \SceneVertex.normal)
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.normal.rawValue))
         glVertexAttribPointer(GLuint(GLKVertexAttrib.normal.rawValue),
                               3,
                               GLenum(GL_FLOAT),
                               GLboolean(GL_FALSE),
-                              Int32(MemoryLayout<GLfloat>.size) * 8,
-                              UnsafeRawPointer.init(bitPattern: MemoryLayout<GLfloat>.size * 3))
+                              GLsizei(MemoryLayout<SceneVertex>.stride),
+                              UnsafeRawPointer.init(bitPattern: offset!))
         
+        offset = MemoryLayout.offset(of: \SceneVertex.texture)
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
         glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue),
                               2,
                               GLenum(GL_FLOAT),
                               GLboolean(GL_FALSE),
-                              Int32(MemoryLayout<GLfloat>.size) * 8,
-                              UnsafeRawPointer.init(bitPattern:  MemoryLayout<GLfloat>.size * 6))
+                              GLsizei(MemoryLayout<SceneVertex>.stride),
+                              UnsafeRawPointer.init(bitPattern:  offset!))
         
             
         
         
     }
 
-    func update() {
-        let bounds = view.bounds
-        let aspect = fabs(bounds.width / bounds.height)
-        let projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(50), Float(aspect), 0.1, 100)
-        var modelViewMatrix = GLKMatrix4MakeTranslation(0, 0, -3.5)
-        modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, rotation, 1, 1, 1)
-        mvpMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix)
-        rotation += Float(timeSinceLastUpdate * 0.75)
-    }
-    
+
     func setupUI() {
-        
-        previewView = PreviewView()
-        previewView.frame = view.bounds
-        view.addSubview(previewView)
+
         
         toolsView = UIView()
         toolsView.frame = view.bounds
@@ -192,58 +202,9 @@ class ViewController: GLKViewController {
         button.backgroundColor = .red
         button.addTarget(self, action: #selector(tapStartButton), for: .touchUpInside)
         toolsView.addSubview(button)
-        
-        captureButton.center = CGPoint(x: view.center.x, y: view.center.y + 100)
-        captureButton.bounds = CGRect(x: 0, y: 0, width: 100, height: 40)
-        captureButton.setTitle("captureImage", for: .normal)
-        captureButton.backgroundColor = .red
-        captureButton.addTarget(self, action: #selector(tapCaptureButton), for: .touchUpInside)
-        toolsView.addSubview(captureButton)
-        
-        recordButton.center = CGPoint(x: view.center.x, y: view.center.y + 150)
-        recordButton.bounds = CGRect(x: 0, y: 0, width: 100, height: 40)
-        recordButton.setTitle("record", for: .normal)
-        recordButton.backgroundColor = .red
-        recordButton.addTarget(self, action: #selector(tapRecordButton), for: .touchUpInside)
-        toolsView.addSubview(recordButton)
+    }
 
-        switcher.frame = CGRect(x: 20, y: 130, width: 100, height: 40)
-        toolsView.addSubview(switcher)
-        switcher.addTarget(self, action: #selector(switcherChange), for: .valueChanged)
-        
-        detectFaceButton.center = CGPoint(x: view.center.x, y: view.center.y + 200)
-        detectFaceButton.bounds = CGRect(x: 0, y: 0, width: 100, height: 40)
-        detectFaceButton.setTitle("detectFace", for: .normal)
-        detectFaceButton.backgroundColor = .red
-        detectFaceButton.addTarget(self, action: #selector(tapdetectFaceButton), for: .touchUpInside)
-        toolsView.addSubview(detectFaceButton)
-        
-        slider = UISlider(frame: CGRect(x: 20, y: 100, width: view.bounds.width - 40, height: 30))
-        view.addSubview(slider)
-        slider.addTarget(self, action: #selector(sliderValueChange), for: .valueChanged)
-        
-    }
-        
-    @objc
-    func switcherChange() {
-        do {
-            let _ = try cameraControl.switchCameras()
-        } catch {
-            
-        }
-        
-    }
-    
-    @objc
-    func tapdetectFaceButton() {
-        cameraControl.faceDetectionDelegate = previewView
-        let _ = cameraControl.setupSessionOutput()
-    }
-    
-    @objc
-    func sliderValueChange() {
-        cameraControl.rampZoomToValue(CGFloat(slider.value))
-    }
+
 
     @objc
     func tapStartButton() {
@@ -251,44 +212,22 @@ class ViewController: GLKViewController {
         cameraControl.textureDelegate = self
         do {
             let _ = try cameraControl.setupSession()
-//            previewView.session = cameraControl.captureSession
             cameraControl.startSession()
-
         } catch {
-
-        }
-
-
-    }
-    
-    @objc
-    func tapCaptureButton() {
-        cameraControl.captureStillImage()
-    }
-    
-    @objc
-    func tapRecordButton() {
-        recordButton.isSelected = !recordButton.isSelected
-        if recordButton.isSelected {
-            let _ = cameraControl.enableHighFrameRateCapture()
-            cameraControl.startRecording()
-            
-            
-        } else {
-            cameraControl.stopRecording()
         }
     }
+
 
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
         glClearColor(0.2, 0.2, 0.2, 1)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         glBindVertexArray(vertexArray)
         shaderProgram.useProgress()
-        
+
         if uniforms != nil {
             
             let v = withUnsafePointer(to: &(mvpMatrix.m00), {$0})
-            
+
             glUniform4fv(uniforms, 1, v)
             glUniform1i(uniforms, 0)
             glDrawArrays(GLenum(GL_TRIANGLES), 0, 36)
@@ -302,7 +241,7 @@ class ViewController: GLKViewController {
 extension ViewController: GLKViewControllerDelegate {
     func glkViewControllerUpdate(_ controller: GLKViewController) {
         let bounds = view.bounds
-        let aspect = fabs(bounds.width / bounds.height)
+        let aspect = abs(bounds.width / bounds.height)
         let projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(50), Float(aspect), 0.1, 100)
         var modelViewMatrix = GLKMatrix4MakeTranslation(0, 0, -3.5)
         modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, rotation, 1, 1, 1)
@@ -333,9 +272,15 @@ extension ViewController: TextureDelegate {
     func textureCreated(with target: GLenum, name: GLuint) {
         glActiveTexture(GLenum(GL_TEXTURE0))
         glBindTexture(target, name)
-        
-        glTexParameterf(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GLfloat(GL_CLAMP_TO_EDGE))
-        glTexParameterf(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GLfloat(GL_CLAMP_TO_EDGE))
+        glCheckError()
+        glTexParameterf(GLenum(GL_TEXTURE_2D),
+                        GLenum(GL_TEXTURE_WRAP_S),
+                        GLfloat(GL_CLAMP_TO_EDGE))
+        glCheckError()
+        glTexParameterf(GLenum(GL_TEXTURE_2D),
+                        GLenum(GL_TEXTURE_WRAP_T),
+                        GLfloat(GL_CLAMP_TO_EDGE))
+        glCheckError()
 
     }
     

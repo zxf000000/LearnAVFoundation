@@ -11,8 +11,6 @@ import GLKit
 
 
 
-
-
 extension Array {
     func size() -> Int {
         return MemoryLayout<Element>.stride * count
@@ -70,17 +68,7 @@ func SceneMatrixForTransform(type: SceneTransformationSelector, axis: SceneTrans
 // category of context
 class ViewController: GLKViewController {
 
-    var transform1Type: SceneTransformationSelector = .SceneTranlate
-    var transform1Axis: SceneTransformationAxisSelector = .SceneXAxis
-    var transform1Value: Float = 0
-    
-    var transform2Type: SceneTransformationSelector = .SceneTranlate
-    var transform2Axis: SceneTransformationAxisSelector = .SceneXAxis
-    var transform2Value: Float = 0
-    
-    var transform3Type: SceneTransformationSelector = .SceneTranlate
-    var transform3Axis: SceneTransformationAxisSelector = .SceneXAxis
-    var transform3Value: Float = 0
+
     
     var context: AGLKContext!
     
@@ -89,45 +77,6 @@ class ViewController: GLKViewController {
     var vertexNormalBuffer: AGLKVertexAttribArrayBuffer?
     var vertexTextureCoordinateBuffer: AGLKVertexAttribArrayBuffer?
 
-    
-    @IBOutlet weak var transform3ValueSlider: UISlider!
-    @IBOutlet weak var transform2ValueSlider: UISlider!
-    @IBOutlet weak var transform1ValueSlider: UISlider!
-    
-    @IBAction func takeTransform1TypeFrom(_ sender: UISegmentedControl) {
-        transform1Type = SceneTransformationSelector(rawValue: sender.selectedSegmentIndex) ?? SceneTransformationSelector.SceneRotate
-    }
-    
-    @IBAction func takeTransform2TypeFrom(_ sender: UISegmentedControl) {
-        transform2Type = SceneTransformationSelector(rawValue: sender.selectedSegmentIndex) ??
-        SceneTransformationSelector.SceneRotate
-    }
-    
-    @IBAction func takeTransform3TypeFrom(_ sender: UISegmentedControl) {
-        transform3Type = SceneTransformationSelector(rawValue: sender.selectedSegmentIndex) ??
-        SceneTransformationSelector.SceneRotate
-    }
-    @IBAction func takeTransform1AxisFrom(_ sender: UISegmentedControl) {
-        transform1Axis = SceneTransformationAxisSelector(rawValue: sender.selectedSegmentIndex)!
-    }
-    @IBAction func takeTransform2AxisFrom(_ sender: UISegmentedControl) {
-        transform2Axis = SceneTransformationAxisSelector(rawValue: sender.selectedSegmentIndex)!
-    }
-    
-    @IBAction func takeTransform3AxisFrom(_ sender: UISegmentedControl) {
-        transform3Axis = SceneTransformationAxisSelector(rawValue: sender.selectedSegmentIndex)!
-    }
-    
-    @IBAction func takeTransform1ValueFrom(_ sender: UISlider) {
-        transform1Value = sender.value
-    }
-    @IBAction func takeTransform2ValueFrom(_ sender: UISlider) {
-        transform2Value = sender.value
-    }
-    @IBAction func takeTransform3ValueFrom(_ sender: UISlider) {
-        transform3Value = sender.value
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -171,51 +120,9 @@ class ViewController: GLKViewController {
         context.clear(mask: GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         
                 
-        vertexPositionBuffer?.prepareToDraw(
-            withArrib: GLuint(GLKVertexAttrib.position.rawValue),
-            numberofCoordinates: 3,
-            attribOffset: 0,
-            shouldEnable: true)
+ 
         
-        vertexNormalBuffer?.prepareToDraw(
-            withArrib: GLuint(GLKVertexAttrib.normal.rawValue),
-            numberofCoordinates: 3,
-            attribOffset: 0,
-            shouldEnable: true)
-        
-        vertexTextureCoordinateBuffer?.prepareToDraw(
-            withArrib: GLuint(GLKVertexAttrib.texCoord0.rawValue),
-            numberofCoordinates: 2,
-            attribOffset: 0,
-            shouldEnable: true)
-        
-        let savedModelviewMatrix = baseEffect.transform.modelviewMatrix
-        var newModelviewMatrix = GLKMatrix4Multiply(savedModelviewMatrix, SceneMatrixForTransform(type: transform1Type, axis: transform1Axis, value: transform1Value))
-        newModelviewMatrix = GLKMatrix4Multiply(newModelviewMatrix, SceneMatrixForTransform(type: transform2Type, axis: transform2Axis, value: transform2Value))
-        newModelviewMatrix = GLKMatrix4Multiply(newModelviewMatrix, SceneMatrixForTransform(type: transform3Type, axis: transform3Axis, value: transform3Value))
-        baseEffect.transform.modelviewMatrix = newModelviewMatrix
-        
-        baseEffect.light0.diffuseColor = GLKVector4Make(1, 1, 1, 1)
-        baseEffect.prepareToDraw()
 
-        AGLKVertexAttribArrayBuffer.drawPreparedArrays(with: GLenum(GL_TRIANGLES), start: 0, numberOfVertices: GLsizei(lowPolyAxesAndModels2NumVerts))
-        
-        baseEffect.transform.modelviewMatrix = savedModelviewMatrix
-        // Change the light color
-        self.baseEffect.light0.diffuseColor = GLKVector4Make(
-           1.0, // Red
-           1.0, // Green
-           0.0, // Blue
-           0.3);// Alpha
-
-        baseEffect.prepareToDraw();
-
-        
-        let aspectRatio = CGFloat(view.drawableWidth) / CGFloat(view.drawableHeight)
-        let transform = GLKMatrix4MakeScale(1, Float(aspectRatio), 1)
-        baseEffect.transform.projectionMatrix = transform
-
-        AGLKVertexAttribArrayBuffer.drawPreparedArrays(with: GLenum(GL_TRIANGLES), start: 0, numberOfVertices: GLsizei(lowPolyAxesAndModels2NumVerts))
 
     }
     

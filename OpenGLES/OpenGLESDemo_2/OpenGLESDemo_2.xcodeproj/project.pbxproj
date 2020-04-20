@@ -50,7 +50,7 @@
 		4E9BD7A8244AC84E00499E18 /* OpenGLESDemo_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLESDemo_2UITests.swift; sourceTree = "<group>"; };
 		4E9BD7AA244AC84E00499E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E9BD7B7244AC8D800499E18 /* AGLKContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGLKContext.swift; sourceTree = "<group>"; };
-		4E9BD7B9244ACAA700499E18 /* AGLKVertexAttribArrayBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGLKVertexAttribArrayBuffer.swift; sourceTree = "<group>"; };
+		4E9BD7B9244ACAA700499E18 /* AGLKVertexAttribArrayBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AGLKVertexAttribArrayBuffer.swift; path = ../../../../CaptureDemo_2/CaptureDemo/CaptureDemo/AGLKVertexAttribArrayBuffer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
