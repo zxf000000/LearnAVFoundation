@@ -43,11 +43,13 @@ class ShaderProgram {
     
     func addVertexAttribute(attribute: GLKVertexAttrib, name: String) {
 
-        glBindAttribLocation(shaderProgram, GLuint(attribute.rawValue), getUnsafePoitner(from: name.utf8CString))
+        glBindAttribLocation(shaderProgram, GLuint(attribute.rawValue), (name as NSString).utf8String)
+        
     }
     
     func uniformIndex(_ uniform: String) -> GLint {
-        return glGetUniformLocation(shaderProgram, getUnsafePoitner(from: uniform.utf8CString))
+        
+        return glGetUniformLocation(shaderProgram, (uniform as NSString).utf8String)
     }
     
     func compile(shader: inout GLuint, type: GLenum, file: String) -> Bool {
@@ -59,11 +61,8 @@ class ShaderProgram {
             var cStringSource = (source as NSString).utf8String
                         
             shader = glCreateShader(type)
-            glCheckError()
             glShaderSource(shader, 1, &cStringSource, nil)
-            glCheckError()
             glCompileShader(shader)
-            glCheckError()
 
             
             var logLength = GLint()
@@ -102,12 +101,12 @@ class ShaderProgram {
         glDeleteShader(verShader)
         glDetachShader(shaderProgram, fragShader)
         glDeleteShader(fragShader)
-        
         return true
     }
     
-    func useProgress() {
+    func useProgram() {
         glUseProgram(shaderProgram)
+        
     }
     
     func getUnsafePoitner(from utf8String: ContiguousArray<CChar>) -> UnsafePointer<CChar> {

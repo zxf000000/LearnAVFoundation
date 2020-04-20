@@ -30,7 +30,7 @@ class CameraController: NSObject {
     // MARK: Texture
     var videoDataOutput: AVCaptureVideoDataOutput!
     var context: CVEAGLContext!
-    var textureCache: CVOpenGLESTextureCache?
+    var textureCache: CVOpenGLESTextureCache!
     var cameraTexture: CVOpenGLESTexture?
     
     
@@ -38,67 +38,12 @@ class CameraController: NSObject {
         self.init()
         self.context = context
    
-        let err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, self.context, nil, &textureCache)
-        
+        let err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, context, nil, &textureCache)
         if err != kCVReturnSuccess {
             print("error creating texture cache, \(err)")
         }
     }
-    
-    override init() {
-        super.init()
-    }
-
-    var cameraCount: Int! {
-        get {
-            return devices().count
-        }
-    }
-    var cameraHasTorch: Bool! {
-        return self.activeCamera().hasTorch
-    }
-    var cameraHasFlash: Bool! {
-        get {
-            return self.activeCamera().hasFlash
-        }
-    }
-    var cameraSupportsTapToFocus: Bool!
-    var cameraSupportsTapToExpose: Bool!
-
-    var torchMode: AVCaptureDevice.TorchMode! {
-        set {
-            let device = self.activeCamera()
-            if device.isTorchModeSupported(newValue) {
-                do {
-                    try device.lockForConfiguration()
-                    device.torchMode = newValue
-                    device.unlockForConfiguration()
-                } catch {
-                    self.delegate.deviceConfigurationFailed(with: nil)
-                }
-            }
-        }
-        get {
-            return self.activeCamera().torchMode
-        }
-    }
-    var flashMode: AVCaptureDevice.FlashMode! {
-        set {
-            if imageOutput != nil {
-                if imageOutput.supportedFlashModes.contains(newValue) {
-                    photoOutputSetting.flashMode = newValue
-                }
-            } else {
-                delegate.deviceConfigurationFailed(with: nil)
-            }
-        }
-        get {
-            return photoOutputSetting.flashMode
-        }
-    }
-
     // private
-    private var videoQueue: DispatchQueue!
     private var activeVideoInput: AVCaptureDeviceInput!
     private var imageOutput: AVCapturePhotoOutput!
     private var photoOutputSetting: AVCapturePhotoSettings!
@@ -107,7 +52,6 @@ class CameraController: NSObject {
 
     private var deviceTypes: [AVCaptureDevice.DeviceType] = {
         var deviceTypes: [AVCaptureDevice.DeviceType] = [
-            .builtInDuoCamera,
             .builtInTelephotoCamera,
             .builtInWideAngleCamera
                                     ]
@@ -141,62 +85,17 @@ class CameraController: NSObject {
             captureSession.addInput(videoInput)
             activeVideoInput = videoInput
         }
-        guard let audioDevice = AVCaptureDevice.default(for: .audio) else {return false}
-        let audioInput = try AVCaptureDeviceInput(device: audioDevice)
-        if captureSession.canAddInput(audioInput) {
-            captureSession.addInput(audioInput)
-        }
-        // setting 放到后面捕捉的时候配置
-
         let _ = setupSessionOutput()
-
-
-        videoQueue = DispatchQueue(label: "com.videoCaptureDemo.videoQueue")
         return true
     }
 
     func startSession() {
         if captureSession.isRunning == false {
-            videoQueue.async {[weak self] in
-                guard let self = self else {return}
-                self.captureSession.startRunning()
-                glCheckError()
+            self.captureSession.startRunning()
 
-            }
+
         }
     }
-
-
-    func uniqURL() -> URL? {
-        let temPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-        let filePath = temPath?.appending("/kamerra_movie.mov") ?? ""
-            
-        return URL(fileURLWithPath: filePath)
-    }
-    
-    func currentVideoOrientation() -> AVCaptureVideoOrientation {
-        var orientation: AVCaptureVideoOrientation?
-        switch UIDevice.current.orientation {
-        case .unknown:
-            orientation = .landscapeRight
-        case .portrait:
-            orientation = .portrait
-        case .portraitUpsideDown:
-            orientation = .portraitUpsideDown
-        case .landscapeLeft:
-            orientation = .landscapeLeft
-        case .landscapeRight:
-            orientation = .landscapeRight
-        case .faceUp:
-            orientation = .portrait
-        case .faceDown:
-            orientation = .portrait
-        @unknown default:
-            orientation = .landscapeRight
-        }
-        return orientation!
-    }
-
 
     private func camera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
         let devices = self.devices()
@@ -212,17 +111,6 @@ class CameraController: NSObject {
         return activeVideoInput.device
     }
 
-    private func inactiveCamera() -> AVCaptureDevice {
-        var device: AVCaptureDevice? = nil
-        if cameraCount > 1 {
-            if activeCamera().position == .back {
-                device = camera(with: .front)
-            } else {
-                device = camera(with: .back)
-            }
-        }
-        return device!
-    }
 
 }
 
@@ -256,21 +144,18 @@ extension CameraController {
 
 extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+
         var err: CVReturn? = nil
-        glCheckError()
 
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
-        glCheckError()
 
         guard let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer) else {return}
-        glCheckError()
 
         let videoDimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
-        glCheckError()
 
         err = CVOpenGLESTextureCacheCreateTextureFromImage(
             kCFAllocatorDefault,
-            textureCache!,
+            textureCache,
             pixelBuffer,
             nil,
             GLenum(GL_TEXTURE_2D),
@@ -281,7 +166,7 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
             GLenum(GL_UNSIGNED_BYTE),
             0,
             &cameraTexture)
-
+        
         
         if err == kCVReturnSuccess {
             let target = CVOpenGLESTextureGetTarget(cameraTexture!)
@@ -290,6 +175,8 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
             textureDelegate.textureCreated(with: target, name: name)
         }
+        
+        print(111)
     }
     
     func cleanTextures() {

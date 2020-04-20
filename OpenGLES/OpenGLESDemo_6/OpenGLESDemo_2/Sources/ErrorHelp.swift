@@ -10,7 +10,6 @@ import GLKit
 
 func glCheckError()
 {
-    
     let errorCode = Int32(glGetError())
     
     switch errorCode {

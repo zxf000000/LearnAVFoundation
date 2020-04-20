@@ -11,9 +11,9 @@
 		4E76EEFA244DB6D500CF1FB2 /* AGLKVertexAttribArrayBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76EEF8244DB6D400CF1FB2 /* AGLKVertexAttribArrayBuffer.swift */; };
 		4E76EEFB244DB6D500CF1FB2 /* AGLKContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76EEF9244DB6D500CF1FB2 /* AGLKContext.swift */; };
 		4E76EEFD244DC26200CF1FB2 /* ErrorHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E76EEFC244DC26100CF1FB2 /* ErrorHelp.swift */; };
-		4E76EF00244DCAF000CF1FB2 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4E76EEFE244DCAF000CF1FB2 /* Shader.fsh */; };
-		4E76EF01244DCAF000CF1FB2 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4E76EEFF244DCAF000CF1FB2 /* Shader.vsh */; };
 		4E7B2DE82448575700812E3F /* ShaderProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B2DE72448575700812E3F /* ShaderProgram.swift */; };
+		B768FC24244DEBB00094DCCD /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = B768FC22244DEBB00094DCCD /* Shader.fsh */; };
+		B768FC25244DEBB00094DCCD /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = B768FC23244DEBB00094DCCD /* Shader.vsh */; };
 		CA2D3219DA2F13655784B391 /* CaptureDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3F6A589B0F1DE2C81749 /* CaptureDemoUITests.swift */; };
 		CA2D3326257F56C5ADE76E40 /* CaptureDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3B6D30DE47871D7E6150 /* CaptureDemoTests.swift */; };
 		CA2D33791F10F5F77355EC25 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D3DFD2D4CCFB8472DD425 /* CameraController.swift */; };
@@ -46,9 +46,9 @@
 		4E76EEF8244DB6D400CF1FB2 /* AGLKVertexAttribArrayBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AGLKVertexAttribArrayBuffer.swift; path = ../../../OpenGLES/OpenGLESDemo_4/OpenGLESDemo_2/Sources/AGLKVertexAttribArrayBuffer.swift; sourceTree = "<group>"; };
 		4E76EEF9244DB6D500CF1FB2 /* AGLKContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AGLKContext.swift; path = ../../../OpenGLES/OpenGLESDemo_4/OpenGLESDemo_2/Sources/AGLKContext.swift; sourceTree = "<group>"; };
 		4E76EEFC244DC26100CF1FB2 /* ErrorHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorHelp.swift; path = ../../../OpenGLES/OpenGLESDemo_6/OpenGLESDemo_2/Sources/ErrorHelp.swift; sourceTree = "<group>"; };
-		4E76EEFE244DCAF000CF1FB2 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
-		4E76EEFF244DCAF000CF1FB2 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		4E7B2DE72448575700812E3F /* ShaderProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderProgram.swift; sourceTree = "<group>"; };
+		B768FC22244DEBB00094DCCD /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		B768FC23244DEBB00094DCCD /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		CA2D31354EE30B3DA63A3AE3 /* CaptureDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaptureDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2D331FB72FB9F10688A0C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		CA2D332F56AFE059F8E0C4BB /* CaptureDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaptureDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,8 +131,8 @@
 		CA2D3FE6237C639F2B124580 /* CaptureDemo */ = {
 			isa = PBXGroup;
 			children = (
-				4E76EEFE244DCAF000CF1FB2 /* Shader.fsh */,
-				4E76EEFF244DCAF000CF1FB2 /* Shader.vsh */,
+				B768FC22244DEBB00094DCCD /* Shader.fsh */,
+				B768FC23244DEBB00094DCCD /* Shader.vsh */,
 				4E76EEFC244DC26100CF1FB2 /* ErrorHelp.swift */,
 				4E76EEF9244DB6D500CF1FB2 /* AGLKContext.swift */,
 				4E76EEF8244DB6D400CF1FB2 /* AGLKVertexAttribArrayBuffer.swift */,
@@ -214,7 +214,7 @@
 				ORGANIZATIONNAME = zxf;
 				TargetAttributes = {
 					CA2D309F914CB34C08B03C94 = {
-						DevelopmentTeam = UZ9FCZ5X8D;
+						DevelopmentTeam = F6MK8JGT5P;
 					};
 				};
 			};
@@ -244,11 +244,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E76EF00244DCAF000CF1FB2 /* Shader.fsh in Resources */,
+				B768FC24244DEBB00094DCCD /* Shader.fsh in Resources */,
 				CA2D33F9CF986E30739D26FE /* Assets.xcassets in Resources */,
 				CA2D3EA30338880A3B037400 /* LaunchScreen.storyboard in Resources */,
 				CA2D382A07D4F92EE4C6E08D /* Main.storyboard in Resources */,
-				4E76EF01244DCAF000CF1FB2 /* Shader.vsh in Resources */,
+				B768FC25244DEBB00094DCCD /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +405,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UZ9FCZ5X8D;
+				DEVELOPMENT_TEAM = F6MK8JGT5P;
 				INFOPLIST_FILE = CaptureDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -433,7 +433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UZ9FCZ5X8D;
+				DEVELOPMENT_TEAM = F6MK8JGT5P;
 				INFOPLIST_FILE = CaptureDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
