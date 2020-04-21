@@ -31,11 +31,11 @@ struct SceneVertex {
 
 class ViewController: GLKViewController {
 
-    var context: EAGLContext = EAGLContext(api: .openGLES3)!
+    var context: EAGLContext = EAGLContext(api: .openGLES2)!
   
-    var uniforms: GLint!
+    var uniforms: [GLint] = [GLint](repeating: GLint(), count: 2)
     var shaderProgram: ShaderProgram!
-    var mvpMatrix: GLKMatrix4!
+    var mvpMatrix: GLKMatrix4! = GLKMatrix4Identity
     var rotation: Float! = 0
     var vertexArray: GLuint! = GLuint()
     var vertexBuffer: GLuint! = GLuint()
@@ -63,18 +63,9 @@ class ViewController: GLKViewController {
         
         self.delegate = self
         cameraControl = CameraController(context: context)
-
-        let bounds = view.bounds
-        let aspect = fabs(bounds.width / bounds.height)
-        let projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(50), Float(aspect), 0.1, 100)
-        var modelViewMatrix = GLKMatrix4MakeTranslation(0, 0, -3.5)
-        modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, rotation, 1, 1, 1)
-        mvpMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix)
-        rotation += Float(timeSinceLastUpdate * 0.75)
-
-//        setupUI()
         
         tapStartButton()
+
     }
     
     func setupGL()  {
@@ -142,7 +133,7 @@ class ViewController: GLKViewController {
         if !result {
             return
         }
-        uniforms = shaderProgram.uniformIndex("mvpMatrix")
+        uniforms[UNIFORM.UNIFORM_MVP_MATRIX.rawValue] = shaderProgram.uniformIndex("mvpMatrix")
         glEnable(GLenum(GL_DEPTH_TEST))
         
         glGenVertexArraysOES(1, &vertexArray)
@@ -181,10 +172,7 @@ class ViewController: GLKViewController {
                               GLboolean(GL_FALSE),
                               GLsizei(MemoryLayout<SceneVertex>.stride),
                               UnsafeRawPointer.init(bitPattern:  offset!))
-        
-            
-        
-        
+
     }
 
 
@@ -219,27 +207,33 @@ class ViewController: GLKViewController {
 
 
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
+
         glClearColor(0.2, 0.2, 0.2, 1)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
-        glBindVertexArray(vertexArray)
-        shaderProgram.useProgress()
+        glBindVertexArrayOES(vertexArray)
 
-        if uniforms != nil {
-            
-            let v = withUnsafePointer(to: &(mvpMatrix.m00), {$0})
+        shaderProgram.useProgram()
 
-            glUniform4fv(uniforms, 1, v)
-            glUniform1i(uniforms, 0)
-            glDrawArrays(GLenum(GL_TRIANGLES), 0, 36)
             
+        let components = MemoryLayout.size(ofValue: mvpMatrix.m)/MemoryLayout.size(ofValue: mvpMatrix.m.0)
+        withUnsafePointer(to: &(mvpMatrix.m)) { point in
+            point.withMemoryRebound(to: GLfloat.self, capacity: components) {
+                glUniformMatrix4fv(uniforms[UNIFORM.UNIFORM_MVP_MATRIX.rawValue], 1, GLboolean(0), $0)
+                
+                glCheckError()
+                glUniform1i(uniforms[UNIFORM.UNIFORM_TEXTURE.rawValue], 0)
+                glDrawArrays(GLenum(GL_TRIANGLES), 0, 36)
+            }
         }
-
+        
+        
     }
 
 }
 
 extension ViewController: GLKViewControllerDelegate {
     func glkViewControllerUpdate(_ controller: GLKViewController) {
+
         let bounds = view.bounds
         let aspect = abs(bounds.width / bounds.height)
         let projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(50), Float(aspect), 0.1, 100)
@@ -247,6 +241,7 @@ extension ViewController: GLKViewControllerDelegate {
         modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, rotation, 1, 1, 1)
         mvpMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix)
         rotation += Float(timeSinceLastUpdate * 0.75)
+
     }
     
     
@@ -270,17 +265,19 @@ extension ViewController: CameraControllerDelegate {
 
 extension ViewController: TextureDelegate {
     func textureCreated(with target: GLenum, name: GLuint) {
+        
         glActiveTexture(GLenum(GL_TEXTURE0))
+
         glBindTexture(target, name)
-        glCheckError()
+
         glTexParameterf(GLenum(GL_TEXTURE_2D),
                         GLenum(GL_TEXTURE_WRAP_S),
                         GLfloat(GL_CLAMP_TO_EDGE))
-        glCheckError()
+
         glTexParameterf(GLenum(GL_TEXTURE_2D),
                         GLenum(GL_TEXTURE_WRAP_T),
                         GLfloat(GL_CLAMP_TO_EDGE))
-        glCheckError()
+
 
     }
     
