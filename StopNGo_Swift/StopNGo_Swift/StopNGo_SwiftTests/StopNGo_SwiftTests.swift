@@ -1,14 +1,15 @@
 //
-//  WriteReadMediaTests.swift
-//  WriteReadMediaTests
+//  StopNGo_SwiftTests.swift
+//  StopNGo_SwiftTests
 //
+//  Created by 壹九科技1 on 2020/4/21.
 //  Copyright © 2020 zxf. All rights reserved.
 //
 
 import XCTest
-@testable import WriteReadMedia
+@testable import StopNGo_Swift
 
-class WriteReadMediaTests: XCTestCase {
+class StopNGo_SwiftTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

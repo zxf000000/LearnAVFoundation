@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StopNGo_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CcQ-HX-Spt">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-Cn-y4w">
+                                        <rect key="frame" x="0.0" y="774" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="EAd-HQ-Ojp"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem title="Start" id="jnz-TB-27E">
+                                                <connections>
+                                                    <action selector="startStop:" destination="BYZ-38-t0r" id="dGR-7z-1vA"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="cjW-8E-ntf"/>
+                                            <barButtonItem title="TakePicker" id="86Z-qd-zHW">
+                                                <connections>
+                                                    <action selector="takePicker:" destination="BYZ-38-t0r" id="SM5-6a-CBp"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="rfw-Cn-y4w" firstAttribute="leading" secondItem="CcQ-HX-Spt" secondAttribute="leading" id="FHy-pU-54i"/>
+                                    <constraint firstAttribute="trailing" secondItem="rfw-Cn-y4w" secondAttribute="trailing" id="UCh-Ze-zXq"/>
+                                    <constraint firstAttribute="bottom" secondItem="rfw-Cn-y4w" secondAttribute="bottom" id="oYo-bi-DUW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="CcQ-HX-Spt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vze-Eq-GKk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="CcQ-HX-Spt" secondAttribute="bottom" id="ebo-Oq-LHG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CcQ-HX-Spt" secondAttribute="trailing" id="kln-OH-sWe"/>
+                            <constraint firstItem="CcQ-HX-Spt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qX3-4s-Hbn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="previewView" destination="CcQ-HX-Spt" id="d8a-HH-FIy"/>
+                        <outlet property="startItem" destination="jnz-TB-27E" id="MbH-jF-bxH"/>
+                        <outlet property="takePickerItem" destination="86Z-qd-zHW" id="72w-L5-YVC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="50"/>
+        </scene>
+    </scenes>
+</document>
