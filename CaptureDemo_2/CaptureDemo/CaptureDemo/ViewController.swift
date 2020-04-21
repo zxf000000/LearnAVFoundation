@@ -163,7 +163,7 @@ class ViewController: GLKViewController {
                               GLboolean(GL_FALSE),
                               GLsizei(MemoryLayout<SceneVertex>.stride),
                               UnsafeRawPointer.init(bitPattern: offset!))
-        
+
         offset = MemoryLayout.offset(of: \SceneVertex.texture)
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
         glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue),
@@ -220,7 +220,6 @@ class ViewController: GLKViewController {
             point.withMemoryRebound(to: GLfloat.self, capacity: components) {
                 glUniformMatrix4fv(uniforms[UNIFORM.UNIFORM_MVP_MATRIX.rawValue], 1, GLboolean(0), $0)
                 
-                glCheckError()
                 glUniform1i(uniforms[UNIFORM.UNIFORM_TEXTURE.rawValue], 0)
                 glDrawArrays(GLenum(GL_TRIANGLES), 0, 36)
             }

@@ -76,7 +76,7 @@ class CameraController: NSObject {
     }
 
     func sessionPreset() -> AVCaptureSession.Preset {
-        return AVCaptureSession.Preset.hd1280x720
+        return AVCaptureSession.Preset.low
     }
     
     func setupSession() throws -> Bool {
@@ -132,9 +132,15 @@ extension CameraController {
 // MARK: Texture
 extension CameraController {
     func setupSessionOutput() -> Bool {
+        
+        
         videoDataOutput = AVCaptureVideoDataOutput()
         videoDataOutput.alwaysDiscardsLateVideoFrames = true
+ 
+
         videoDataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_32BGRA] as [String: Any]
+        
+        
         /// 这个队列可以指定专门的队列,
         videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         if captureSession.canAddOutput(videoDataOutput) {
@@ -157,18 +163,16 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
         let videoDimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
 
-        print("width   \(videoDimensions.width)   height   \(videoDimensions.height)")
-        
         err = CVOpenGLESTextureCacheCreateTextureFromImage(
             kCFAllocatorDefault,
             textureCache,
             pixelBuffer,
             nil,
             GLenum(GL_TEXTURE_2D),
-            GL_RGBA,
+            GL_RGBA,                                /// 这个是输出的颜色
             videoDimensions.height,
             videoDimensions.height,
-            GLenum(GL_BGRA),
+            GLenum(GL_BGRA),                        /// 这个是 pixelbuffer 的格式(也就是输入的颜色), 如果设置的和pixel buffer 即 videoDataOutput的格式不一样,会导致颜色偏差,或者报错
             GLenum(GL_UNSIGNED_BYTE),
             0,
             &cameraTexture)
