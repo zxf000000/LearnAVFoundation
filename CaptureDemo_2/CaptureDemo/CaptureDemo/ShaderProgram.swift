@@ -72,7 +72,7 @@ class ShaderProgram {
                 let log = UnsafeMutablePointer<GLchar>.allocate(capacity: Int(logLength))
                 glGetShaderInfoLog(shader, logLength, &logLength, log)
                 
-                print("Shader compile log: \(String(cString: log, encoding: .utf8)))")
+                print("Shader compile log: \(String(describing: String(cString: log, encoding: .unicode))))")
                 
                 free(log)
             }
