@@ -22,15 +22,6 @@
 		4E760B3E244FF6F50031998A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B3C244FF6F50031998A /* LaunchScreen.storyboard */; };
 		4E760B49244FF6F50031998A /* FifteenSeconds_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E760B48244FF6F50031998A /* FifteenSeconds_SwiftTests.swift */; };
 		4E760B54244FF6F50031998A /* FifteenSeconds_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E760B53244FF6F50031998A /* FifteenSeconds_SwiftUITests.swift */; };
-		4E760B6F244FFAB90031998A /* 01_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B63244FFAB90031998A /* 01_nebula.mp4 */; };
-		4E760B70244FFAB90031998A /* 03_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B64244FFAB90031998A /* 03_nebula.mp4 */; };
-		4E760B71244FFAB90031998A /* 04_quasar.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B65244FFAB90031998A /* 04_quasar.mp4 */; };
-		4E760B72244FFAB90031998A /* 02_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B66244FFAB90031998A /* 02_blackhole.mp4 */; };
-		4E760B73244FFAB90031998A /* 05_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B67244FFAB90031998A /* 05_blackhole.mp4 */; };
-		4E760B74244FFAB90031998A /* 02 Keep Going.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B6A244FFAB90031998A /* 02 Keep Going.m4a */; };
-		4E760B75244FFAB90031998A /* 01 Star Gazing.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B6B244FFAB90031998A /* 01 Star Gazing.m4a */; };
-		4E760B76244FFAB90031998A /* John F. Kennedy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B6D244FFAB90031998A /* John F. Kennedy.m4a */; };
-		4E760B77244FFAB90031998A /* Ronald Reagan.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B6E244FFAB90031998A /* Ronald Reagan.m4a */; };
 		4E760B7E244FFCAA0031998A /* PickerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E760B7D244FFCAA0031998A /* PickerTabBarController.swift */; };
 		4E760B80244FFD300031998A /* VideoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E760B7F244FFD300031998A /* VideoPickerViewController.swift */; };
 		4E760B82244FFD390031998A /* AudioPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E760B81244FFD390031998A /* AudioPickerViewController.swift */; };
@@ -81,15 +72,6 @@
 		4E760B4F244FF6F50031998A /* FifteenSeconds_SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FifteenSeconds_SwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E760B53244FF6F50031998A /* FifteenSeconds_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifteenSeconds_SwiftUITests.swift; sourceTree = "<group>"; };
 		4E760B55244FF6F50031998A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4E760B63244FFAB90031998A /* 01_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01_nebula.mp4; sourceTree = "<group>"; };
-		4E760B64244FFAB90031998A /* 03_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 03_nebula.mp4; sourceTree = "<group>"; };
-		4E760B65244FFAB90031998A /* 04_quasar.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04_quasar.mp4; sourceTree = "<group>"; };
-		4E760B66244FFAB90031998A /* 02_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02_blackhole.mp4; sourceTree = "<group>"; };
-		4E760B67244FFAB90031998A /* 05_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 05_blackhole.mp4; sourceTree = "<group>"; };
-		4E760B6A244FFAB90031998A /* 02 Keep Going.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02 Keep Going.m4a"; sourceTree = "<group>"; };
-		4E760B6B244FFAB90031998A /* 01 Star Gazing.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01 Star Gazing.m4a"; sourceTree = "<group>"; };
-		4E760B6D244FFAB90031998A /* John F. Kennedy.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "John F. Kennedy.m4a"; sourceTree = "<group>"; };
-		4E760B6E244FFAB90031998A /* Ronald Reagan.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ronald Reagan.m4a"; sourceTree = "<group>"; };
 		4E760B7D244FFCAA0031998A /* PickerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTabBarController.swift; sourceTree = "<group>"; };
 		4E760B7F244FFD300031998A /* VideoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPickerViewController.swift; sourceTree = "<group>"; };
 		4E760B81244FFD390031998A /* AudioPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPickerViewController.swift; sourceTree = "<group>"; };
@@ -194,49 +176,8 @@
 		4E760B61244FFAAE0031998A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4E760B68244FFAB90031998A /* Audio */,
-				4E760B62244FFAB90031998A /* Video */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		4E760B62244FFAB90031998A /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				4E760B63244FFAB90031998A /* 01_nebula.mp4 */,
-				4E760B64244FFAB90031998A /* 03_nebula.mp4 */,
-				4E760B65244FFAB90031998A /* 04_quasar.mp4 */,
-				4E760B66244FFAB90031998A /* 02_blackhole.mp4 */,
-				4E760B67244FFAB90031998A /* 05_blackhole.mp4 */,
-			);
-			path = Video;
-			sourceTree = "<group>";
-		};
-		4E760B68244FFAB90031998A /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				4E760B69244FFAB90031998A /* Music */,
-				4E760B6C244FFAB90031998A /* VoiceOvers */,
-			);
-			path = Audio;
-			sourceTree = "<group>";
-		};
-		4E760B69244FFAB90031998A /* Music */ = {
-			isa = PBXGroup;
-			children = (
-				4E760B6A244FFAB90031998A /* 02 Keep Going.m4a */,
-				4E760B6B244FFAB90031998A /* 01 Star Gazing.m4a */,
-			);
-			path = Music;
-			sourceTree = "<group>";
-		};
-		4E760B6C244FFAB90031998A /* VoiceOvers */ = {
-			isa = PBXGroup;
-			children = (
-				4E760B6D244FFAB90031998A /* John F. Kennedy.m4a */,
-				4E760B6E244FFAB90031998A /* Ronald Reagan.m4a */,
-			);
-			path = VoiceOvers;
 			sourceTree = "<group>";
 		};
 		4E760B78244FFB1C0031998A /* Categories */ = {
@@ -403,20 +344,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E760B76244FFAB90031998A /* John F. Kennedy.m4a in Resources */,
 				4E760B91245015CA0031998A /* VideoItemTableViewCell.xib in Resources */,
-				4E760B73244FFAB90031998A /* 05_blackhole.mp4 in Resources */,
 				4E760B93245015D00031998A /* AudioItemTableViewCell.xib in Resources */,
-				4E760B75244FFAB90031998A /* 01 Star Gazing.m4a in Resources */,
 				4E760B3E244FF6F50031998A /* LaunchScreen.storyboard in Resources */,
-				4E760B72244FFAB90031998A /* 02_blackhole.mp4 in Resources */,
-				4E760B74244FFAB90031998A /* 02 Keep Going.m4a in Resources */,
-				4E760B70244FFAB90031998A /* 03_nebula.mp4 in Resources */,
 				4E760B3B244FF6F50031998A /* Assets.xcassets in Resources */,
 				4E760B39244FF6F20031998A /* Main.storyboard in Resources */,
-				4E760B71244FFAB90031998A /* 04_quasar.mp4 in Resources */,
-				4E760B6F244FFAB90031998A /* 01_nebula.mp4 in Resources */,
-				4E760B77244FFAB90031998A /* Ronald Reagan.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
