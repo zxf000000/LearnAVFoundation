@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="159" id="KGk-i7-Jjw" customClass="AudioItemTableViewCell" customModule="FifteenSeconds_Swift" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="518" height="159"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="518" height="159"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZY-uv-VAo">
+                        <rect key="frame" x="40" y="11" width="55" height="137"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCF-xR-scr">
+                        <rect key="frame" x="452.5" y="68.5" width="15.5" height="22"/>
+                        <state key="normal" image="play" catalog="system"/>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="0ZY-uv-VAo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="Gyv-IK-0D6"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="0ZY-uv-VAo" secondAttribute="bottom" id="Zvk-s5-OkF"/>
+                    <constraint firstItem="0ZY-uv-VAo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="fk7-gt-26o"/>
+                    <constraint firstItem="fCF-xR-scr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nwr-vE-98Q"/>
+                    <constraint firstItem="fCF-xR-scr" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-30" id="wez-6O-ros"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="previewButton" destination="fCF-xR-scr" id="gET-7P-IZg"/>
+                <outlet property="titleLabel" destination="0ZY-uv-VAo" id="tCV-MH-D1d"/>
+            </connections>
+            <point key="canvasLocation" x="-297.10144927536237" y="73.995535714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="play" catalog="system" width="120" height="128"/>
+    </resources>
+</document>

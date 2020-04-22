@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K5i-r9-w0h">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Fifteen Seconds-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FifteenSeconds_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Fifteen Seconds" id="tgo-wN-jKL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xps-yz-N81">
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="tapAddItem:" destination="BYZ-38-t0r" id="rIE-8o-lH6"/>
+                                <segue destination="vyg-bE-GBO" kind="show" id="2xc-4J-UgR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-865" y="-804"/>
+        </scene>
+        <!--Audio Picker View Controller-->
+        <scene sceneID="P7S-30-8A7">
+            <objects>
+                <viewController id="1Yu-mw-OwE" customClass="AudioPickerViewController" customModule="FifteenSeconds_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4AH-QX-EDh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="STV-zM-dwa">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="1Yu-mw-OwE" id="n4O-ZE-Oay"/>
+                                    <outlet property="delegate" destination="1Yu-mw-OwE" id="Uq0-EZ-uzd"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="STV-zM-dwa" firstAttribute="top" secondItem="pwU-GG-fVZ" secondAttribute="top" id="3dn-v1-xgz"/>
+                            <constraint firstItem="pwU-GG-fVZ" firstAttribute="trailing" secondItem="STV-zM-dwa" secondAttribute="trailing" id="Mz7-sy-MBG"/>
+                            <constraint firstItem="pwU-GG-fVZ" firstAttribute="bottom" secondItem="STV-zM-dwa" secondAttribute="bottom" id="UKb-9N-y3i"/>
+                            <constraint firstItem="STV-zM-dwa" firstAttribute="leading" secondItem="pwU-GG-fVZ" secondAttribute="leading" id="W1a-Pk-0gp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pwU-GG-fVZ"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="THTabBarAudio" selectedImage="THTabBarAudio_selected" id="i9X-NT-kmS"/>
+                    <connections>
+                        <outlet property="tableView" destination="STV-zM-dwa" id="TFF-Xk-tL0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9gd-zM-jR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2239.130434782609" y="-382.36607142857139"/>
+        </scene>
+        <!--Video Picker View Controller-->
+        <scene sceneID="N36-5M-TXB">
+            <objects>
+                <viewController id="M28-LW-VFb" customClass="VideoPickerViewController" customModule="FifteenSeconds_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dvb-4b-o5v">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lh6-nG-anK">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="M28-LW-VFb" id="TWW-3P-Nte"/>
+                                    <outlet property="delegate" destination="M28-LW-VFb" id="PxV-ZI-iI6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2Gc-vf-dnW" firstAttribute="bottom" secondItem="Lh6-nG-anK" secondAttribute="bottom" id="MjQ-sX-GOo"/>
+                            <constraint firstItem="Lh6-nG-anK" firstAttribute="leading" secondItem="2Gc-vf-dnW" secondAttribute="leading" id="OQL-E0-on8"/>
+                            <constraint firstItem="2Gc-vf-dnW" firstAttribute="trailing" secondItem="Lh6-nG-anK" secondAttribute="trailing" id="YPv-5H-CKa"/>
+                            <constraint firstItem="Lh6-nG-anK" firstAttribute="top" secondItem="2Gc-vf-dnW" secondAttribute="top" id="bdY-tE-TT6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2Gc-vf-dnW"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="THTabBarVideo" selectedImage="THTabBarVideo_selected" id="uMH-RB-se3"/>
+                    <connections>
+                        <outlet property="tableView" destination="Lh6-nG-anK" id="Buq-qA-wZL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bo4-vF-732" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="910" y="-1049"/>
+        </scene>
+        <!--Picker Tab Bar Controller-->
+        <scene sceneID="UnP-2t-PeI">
+            <objects>
+                <tabBarController storyboardIdentifier="PickerTabBarController" id="vyg-bE-GBO" customClass="PickerTabBarController" customModule="FifteenSeconds_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="BAh-uR-6zc"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eEU-9e-Dvk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="M28-LW-VFb" kind="relationship" relationship="viewControllers" id="hjI-kq-VDF"/>
+                        <segue destination="1Yu-mw-OwE" kind="relationship" relationship="viewControllers" id="3TL-NM-xhE"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3iu-ww-JGD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6" y="-1035"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1Kf-Rx-I7m">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K5i-r9-w0h" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3VA-Os-Vmf">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0eJ-0A-xEr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KgP-IO-OEK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1077" y="-107"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="THTabBarAudio" width="25" height="25"/>
+        <image name="THTabBarAudio_selected" width="25" height="25"/>
+        <image name="THTabBarVideo" width="21" height="25"/>
+        <image name="THTabBarVideo_selected" width="21" height="25"/>
+    </resources>
+</document>
