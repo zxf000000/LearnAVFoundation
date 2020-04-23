@@ -9,7 +9,7 @@
 import AVFoundation
 
 class AudioItem: MediaItem {
-    var volumnAutomation: [Any]?
+    var volumnAutomation: [VolumeAutomation]?
     
     override var mediaType: AVMediaType? {
         get {

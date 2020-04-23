@@ -10,6 +10,19 @@ import UIKit
 
 class PickerTabBarController: UITabBarController {
 
+    var playbackMediator: PlaybackMediator! {
+        didSet {
+            for vc in self.children {
+                if let aVC = vc as? VideoPickerViewController {
+                    aVC.mediaPlaybackMediator = playbackMediator
+                }
+                if let aVC = vc as? AudioPickerViewController {
+                    aVC.playbackMediator = playbackMediator
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

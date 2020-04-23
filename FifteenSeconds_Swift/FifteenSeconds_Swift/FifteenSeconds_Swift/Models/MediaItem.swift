@@ -25,7 +25,7 @@ class MediaItem: TimeLineItem {
         }
     }
     
-    private var _title: String?
+    var _title: String?
     
     var title: String? {
         set {

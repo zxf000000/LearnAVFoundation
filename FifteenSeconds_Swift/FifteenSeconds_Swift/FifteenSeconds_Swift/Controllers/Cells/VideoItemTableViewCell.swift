@@ -10,6 +10,8 @@ import UIKit
 
 class VideoItemTableViewCell: UITableViewCell {
 
+    var tapAddButtonBlock: (() -> Void)?
+    
     var overlayView: VideoPickerOverlayView!
     
     var playButton: UIButton! {
@@ -31,7 +33,14 @@ class VideoItemTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         overlayView = VideoPickerOverlayView(frame: bounds)
         contentView.addSubview(overlayView)
+        
+        overlayView.addButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
 
+    }
+    
+    @objc
+    func tapAddButton() {
+        tapAddButtonBlock?()
     }
 
     func setThumbnails(thumbnails: [UIImage]) {

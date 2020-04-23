@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4E760B2D244FF6F20031998A"
+               BuildableName = "FifteenSeconds_Swift.app"
+               BlueprintName = "FifteenSeconds_Swift"
+               ReferencedContainer = "container:FifteenSeconds_Swift.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4E760B2D244FF6F20031998A"
+            BuildableName = "FifteenSeconds_Swift.app"
+            BlueprintName = "FifteenSeconds_Swift"
+            ReferencedContainer = "container:FifteenSeconds_Swift.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+</Scheme>

@@ -15,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        AppSettings.shared.transitionEnabled = true
+        AppSettings.shared.volumeFadesEnabled = true
+        AppSettings.shared.volumeDuckingEnabled = true
+        AppSettings.shared.titlesEnabled = true
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         window?.makeKeyAndVisible()

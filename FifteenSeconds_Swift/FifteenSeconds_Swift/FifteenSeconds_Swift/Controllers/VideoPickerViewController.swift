@@ -65,12 +65,18 @@ extension VideoPickerViewController: UITableViewDelegate, UITableViewDataSource 
         registCellAction(cell: cell)
         let item = videoItems[indexPath.row]
         cell.setThumbnails(thumbnails: item.thumbnails ?? [UIImage]())
+        
+        cell.tapAddButtonBlock = {[weak self] in
+            let item = self?.videoItems[indexPath.row]
+            self?.mediaPlaybackMediator?.addMediaItem(item: item!, toTimelineTrack: .video)
+        }
+        
         return cell
     }
     
     func registCellAction(cell: VideoItemTableViewCell) {
         cell.playButton.addTarget(self, action: #selector(handlePreviewTap(sender:)), for: .touchUpInside)
-        cell.addButton.addTarget(self, action: #selector(handleAddMediaItemTap(sender:)), for: .touchUpOutside)
+//        cell.addButton.addTarget(self, action: #selector(handleAddMediaItemTap(sender:)), for: .touchUpOutside)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

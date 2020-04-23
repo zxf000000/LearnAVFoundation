@@ -19,7 +19,7 @@ class TimeLine {
     var transitons: [Any]?
     var titles: [Any]?
     var voiceOvers: [Any]?
-    var musicItems: [AudioItem]?
+    var musicItems: [Any]?
     
     func isSimpleTimeline() -> Bool {
         guard let items = musicItems else {
@@ -29,7 +29,7 @@ class TimeLine {
             return true
         }
         for (_, item) in items.enumerated() {
-            if item.volumnAutomation?.count ?? 0 > 0 {
+            if (item as! AudioItem).volumnAutomation?.count ?? 0 > 0 {
                 return false
             }
         }
