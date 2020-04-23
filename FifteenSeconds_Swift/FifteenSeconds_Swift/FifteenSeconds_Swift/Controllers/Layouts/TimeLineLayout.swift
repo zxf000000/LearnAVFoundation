@@ -62,17 +62,17 @@ class TimelineLayout: UICollectionViewLayout {
     
     
     private var contentSize: CGSize?
-    private var caculateLayout: [IndexPath: Any]?
-    private var initialLayout: [IndexPath: Any]?
+    private var caculateLayout: [IndexPath: UICollectionViewLayoutAttributes]?
+    private var initialLayout: [IndexPath: UICollectionViewLayoutAttributes]?
     
     private var updates: [Any]?
     private var scaleUnit: CGFloat?
     
     private var panDirection: PanDirection?
     
-    private weak var panGestureRecognize: UIPanGestureRecognizer?
-    private weak var longPressGestureRecognize: UILongPressGestureRecognizer?
-    private weak var tapGestureRecognize: UITapGestureRecognizer?
+    private  var panGestureRecognize: UIPanGestureRecognizer?
+    private  var longPressGestureRecognize: UILongPressGestureRecognizer?
+    private  var tapGestureRecognize: UITapGestureRecognizer?
     
     private var selectedIndexPath: IndexPath?
     private var dragableImageView: UIImageView?
@@ -101,7 +101,7 @@ class TimelineLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        var layoutDic = Dictionary<IndexPath,Any>()
+        var layoutDic = Dictionary<IndexPath,UICollectionViewLayoutAttributes>()
         var xPos = trackInsets?.left
         var yPos: CGFloat = 0
         let delegate = collectionView?.delegate as? UICollectionViewDelegateTimelineLayout
@@ -145,12 +145,108 @@ class TimelineLayout: UICollectionViewLayout {
 
     }
     
+    override var collectionViewContentSize: CGSize {
+        get {
+            self.contentSize!
+        }
+    }
+    
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        var allAttribute = [UICollectionViewLayoutAttributes]()
+        caculateLayout?.forEach({ (indexpath, element) in
+            if rect.intersects(element.frame) {
+                allAttribute.append(element)
+            }
+        })
+        return allAttribute
+    }
+    
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        return caculateLayout?[indexPath]
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        panGestureRecognize = UIPanGestureRecognizer(target: self, action: #selector(handleDrag(_:)))
+        longPressGestureRecognize = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressGestureRecognize?.minimumPressDuration = 0.5
+        tapGestureRecognize = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        tapGestureRecognize?.numberOfTouchesRequired = 2
+        
+        collectionView?.gestureRecognizers?.forEach({ (ges) in
+            if ges.isKind(of: UIPanGestureRecognizer.self) {
+                ges.require(toFail: panGestureRecognize!)
+            } else if ges.isKind(of: UILongPressGestureRecognizer.self) {
+                ges.require(toFail: longPressGestureRecognize!)
+            }
+        })
+        
+        panGestureRecognize?.delegate = self
+        longPressGestureRecognize?.delegate = self
+        tapGestureRecognize?.delegate = self
+        
+        collectionView?.addGestureRecognizer(panGestureRecognize!)
+        collectionView?.addGestureRecognizer(tapGestureRecognize!)
+        collectionView?.addGestureRecognizer(longPressGestureRecognize!)
+        
+        
+    }
     
     
+    @objc
+    func handleDrag(_ pan: UIPanGestureRecognizer) {
+        
+    }
+    
+    @objc
+    func handleDoubleTap(_ tap: UITapGestureRecognizer) {
+        let location = tap.location(in: collectionView)
+        guard let indexPath = collectionView?.indexPathForItem(at: location) else { return }
+        let delegate: UICollectionViewDelegateTimelineLayout = (collectionView?.delegate as! UICollectionViewDelegateTimelineLayout)
+        delegate.collectionView(collectionView: collectionView!, willDeleteItemAt: indexPath)
+        collectionView?.deleteItems(at: [indexPath])
+    }
+    
+    @objc
+    func handleLongPress(_ longPress: UITapGestureRecognizer) {
+        if longPress.state == .began {
+            dragMode = .move
+            let location = longPress.location(in: collectionView)
+            guard let indexPath = collectionView?.indexPathForItem(at: location) else {return}
+            selectedIndexPath = indexPath
+            collectionView?.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionView.ScrollPosition.top)
+            
+            let cell = collectionView?.cellForItem(at: indexPath)
+            cell?.isHighlighted = true
+            dragableImageView = cell?.toImageView()
+            dragableImageView?.frame = cell?.frame as! CGRect
+            collectionView?.addSubview(dragableImageView!)
+        }
+        
+        if longPress.state == .ended {
+            let attributes = layoutAttributesForItem(at: selectedIndexPath!)
+            UIView.animate(withDuration: 0.15, animations: {
+                self.dragableImageView?.frame = (attributes?.frame)!
+            }) { (result) in
+                self.invalidateLayout()
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.dragableImageView?.alpha = 0
+                }) { (_) in
+                    let cell = self.collectionView?.cellForItem(at: self.selectedIndexPath!)
+                    cell?.isSelected = true
+                    self.dragableImageView?.removeFromSuperview()
+                    self.dragableImageView = nil
+                }
+                self.selectedIndexPath = nil
+                self.dragMode = .trim
+            }
+        }
+    }
     
 }
 
@@ -158,4 +254,13 @@ class TimelineLayout: UICollectionViewLayout {
 class TimelineLayoutAttribute: UICollectionViewLayoutAttributes {
     var maxFrameWidth: CGFloat?
     var scaleUnit: CGFloat?
+}
+
+extension TimelineLayout: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

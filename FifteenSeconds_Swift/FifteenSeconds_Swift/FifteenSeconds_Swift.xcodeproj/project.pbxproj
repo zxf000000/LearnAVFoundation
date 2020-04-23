@@ -31,6 +31,16 @@
 		4E760B91245015CA0031998A /* VideoItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B90245015CA0031998A /* VideoItemTableViewCell.xib */; };
 		4E760B93245015D00031998A /* AudioItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B92245015D00031998A /* AudioItemTableViewCell.xib */; };
 		4E760B95245015F40031998A /* ThumbnailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E760B94245015F40031998A /* ThumbnailsView.swift */; };
+		B768FC7024508D140094DCCD /* 02 Keep Going.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6524508D130094DCCD /* 02 Keep Going.m4a */; };
+		B768FC7124508D140094DCCD /* 01 Star Gazing.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6624508D130094DCCD /* 01 Star Gazing.m4a */; };
+		B768FC7224508D140094DCCD /* John F. Kennedy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6824508D130094DCCD /* John F. Kennedy.m4a */; };
+		B768FC7324508D140094DCCD /* Ronald Reagan.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6924508D130094DCCD /* Ronald Reagan.m4a */; };
+		B768FC7424508D140094DCCD /* 01_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6B24508D140094DCCD /* 01_nebula.mp4 */; };
+		B768FC7524508D140094DCCD /* 03_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6C24508D140094DCCD /* 03_nebula.mp4 */; };
+		B768FC7624508D140094DCCD /* 04_quasar.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6D24508D140094DCCD /* 04_quasar.mp4 */; };
+		B768FC7724508D140094DCCD /* 02_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6E24508D140094DCCD /* 02_blackhole.mp4 */; };
+		B768FC7824508D140094DCCD /* 05_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6F24508D140094DCCD /* 05_blackhole.mp4 */; };
+		B768FC7C245098300094DCCD /* UIView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B768FC7B245098300094DCCD /* UIView+Add.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +91,16 @@
 		4E760B90245015CA0031998A /* VideoItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoItemTableViewCell.xib; sourceTree = "<group>"; };
 		4E760B92245015D00031998A /* AudioItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioItemTableViewCell.xib; sourceTree = "<group>"; };
 		4E760B94245015F40031998A /* ThumbnailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsView.swift; sourceTree = "<group>"; };
+		B768FC6524508D130094DCCD /* 02 Keep Going.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02 Keep Going.m4a"; sourceTree = "<group>"; };
+		B768FC6624508D130094DCCD /* 01 Star Gazing.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01 Star Gazing.m4a"; sourceTree = "<group>"; };
+		B768FC6824508D130094DCCD /* John F. Kennedy.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "John F. Kennedy.m4a"; sourceTree = "<group>"; };
+		B768FC6924508D130094DCCD /* Ronald Reagan.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ronald Reagan.m4a"; sourceTree = "<group>"; };
+		B768FC6B24508D140094DCCD /* 01_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01_nebula.mp4; sourceTree = "<group>"; };
+		B768FC6C24508D140094DCCD /* 03_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 03_nebula.mp4; sourceTree = "<group>"; };
+		B768FC6D24508D140094DCCD /* 04_quasar.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04_quasar.mp4; sourceTree = "<group>"; };
+		B768FC6E24508D140094DCCD /* 02_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02_blackhole.mp4; sourceTree = "<group>"; };
+		B768FC6F24508D140094DCCD /* 05_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 05_blackhole.mp4; sourceTree = "<group>"; };
+		B768FC7B245098300094DCCD /* UIView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Add.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +159,7 @@
 		4E760B30244FF6F20031998A /* FifteenSeconds_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				B768FC792450980B0094DCCD /* Categories */,
 				4E760B7C244FFB390031998A /* Views */,
 				4E760B7B244FFB320031998A /* Models */,
 				4E760B7A244FFB290031998A /* Controllers */,
@@ -176,6 +197,8 @@
 		4E760B61244FFAAE0031998A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B768FC6324508D130094DCCD /* Audio */,
+				B768FC6A24508D140094DCCD /* Video */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -238,6 +261,53 @@
 				4E760B8A245013720031998A /* AudioItemTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		B768FC6324508D130094DCCD /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				B768FC6424508D130094DCCD /* Music */,
+				B768FC6724508D130094DCCD /* VoiceOvers */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		B768FC6424508D130094DCCD /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				B768FC6524508D130094DCCD /* 02 Keep Going.m4a */,
+				B768FC6624508D130094DCCD /* 01 Star Gazing.m4a */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		B768FC6724508D130094DCCD /* VoiceOvers */ = {
+			isa = PBXGroup;
+			children = (
+				B768FC6824508D130094DCCD /* John F. Kennedy.m4a */,
+				B768FC6924508D130094DCCD /* Ronald Reagan.m4a */,
+			);
+			path = VoiceOvers;
+			sourceTree = "<group>";
+		};
+		B768FC6A24508D140094DCCD /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				B768FC6B24508D140094DCCD /* 01_nebula.mp4 */,
+				B768FC6C24508D140094DCCD /* 03_nebula.mp4 */,
+				B768FC6D24508D140094DCCD /* 04_quasar.mp4 */,
+				B768FC6E24508D140094DCCD /* 02_blackhole.mp4 */,
+				B768FC6F24508D140094DCCD /* 05_blackhole.mp4 */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		B768FC792450980B0094DCCD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B768FC7B245098300094DCCD /* UIView+Add.swift */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +378,7 @@
 				TargetAttributes = {
 					4E760B2D244FF6F20031998A = {
 						CreatedOnToolsVersion = 11.4;
+						LastSwiftMigration = 1140;
 					};
 					4E760B43244FF6F50031998A = {
 						CreatedOnToolsVersion = 11.4;
@@ -344,8 +415,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B768FC7024508D140094DCCD /* 02 Keep Going.m4a in Resources */,
 				4E760B91245015CA0031998A /* VideoItemTableViewCell.xib in Resources */,
+				B768FC7524508D140094DCCD /* 03_nebula.mp4 in Resources */,
+				B768FC7124508D140094DCCD /* 01 Star Gazing.m4a in Resources */,
+				B768FC7724508D140094DCCD /* 02_blackhole.mp4 in Resources */,
+				B768FC7624508D140094DCCD /* 04_quasar.mp4 in Resources */,
 				4E760B93245015D00031998A /* AudioItemTableViewCell.xib in Resources */,
+				B768FC7224508D140094DCCD /* John F. Kennedy.m4a in Resources */,
+				B768FC7424508D140094DCCD /* 01_nebula.mp4 in Resources */,
+				B768FC7324508D140094DCCD /* Ronald Reagan.m4a in Resources */,
+				B768FC7824508D140094DCCD /* 05_blackhole.mp4 in Resources */,
 				4E760B3E244FF6F50031998A /* LaunchScreen.storyboard in Resources */,
 				4E760B3B244FF6F50031998A /* Assets.xcassets in Resources */,
 				4E760B39244FF6F20031998A /* Main.storyboard in Resources */,
@@ -381,6 +461,7 @@
 				4E760B8F245013C80031998A /* VideoPickerOverlayView.swift in Sources */,
 				4E5DB0C624501C520027C88D /* TimeLineItem.swift in Sources */,
 				4E760B82244FFD390031998A /* AudioPickerViewController.swift in Sources */,
+				B768FC7C245098300094DCCD /* UIView+Add.swift in Sources */,
 				4E760B7E244FFCAA0031998A /* PickerTabBarController.swift in Sources */,
 				4E5DB0CC245044130027C88D /* PlaybackMediator.swift in Sources */,
 				4E5DB0C424501A360027C88D /* VideoTransition.swift in Sources */,
@@ -562,6 +643,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FifteenSeconds_Swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -570,6 +652,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zxf.www.FifteenSeconds-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -579,6 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FifteenSeconds_Swift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
