@@ -58,8 +58,8 @@ class TimeLineViewController: UIViewController {
         backgroundView.backgroundColor = UIColor(patternImage: pattenImage!) ?? UIColor.red
         collectionView.backgroundView = backgroundView
         
-        playHeadView = PlayHeaderView(frame: view.bounds)
-        view.addSubview(playHeadView!)
+//        playHeadView = PlayHeaderView(frame: view.bounds)
+//        view.addSubview(playHeadView!)
         
         
     }

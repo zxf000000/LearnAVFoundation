@@ -7,9 +7,11 @@
 //
 
 import CoreMedia
+import UIKit
+
 
 let TIMELINE_SECONDS: CGFloat = 15.0
-let TIMELINE_WIDTH: CGFloat = 1014.0
+let TIMELINE_WIDTH: CGFloat = UIScreen.main.bounds.width
 
 func GetWidthFor(timeRange: CMTimeRange, scaleFactor: CGFloat) -> CGFloat {
     return CGFloat(CMTimeGetSeconds(timeRange.duration)) * scaleFactor
