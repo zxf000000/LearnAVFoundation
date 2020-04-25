@@ -113,7 +113,7 @@ class TimelineLayout: UICollectionViewLayout {
             let itemCount = collectionView?.numberOfItems(inSection: track)
             for item in 0..<itemCount! {
                 let indexPath = IndexPath(item: item, section: track)
-                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath) as! TimelineLayoutAttribute
+                let attributes = TimelineLayoutAttribute(forCellWith: indexPath)
                 let width = delegate?.collectionView(collectionView: collectionView!, widthForItemAt: indexPath)
                 let position = delegate?.collectionView(collectionView: collectionView!, positionForItemAt: indexPath)
                 if position?.x ?? 0 > 0 {
@@ -167,7 +167,9 @@ class TimelineLayout: UICollectionViewLayout {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setup()
+
     }
     
     override func awakeFromNib() {
@@ -177,7 +179,7 @@ class TimelineLayout: UICollectionViewLayout {
         longPressGestureRecognize = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGestureRecognize?.minimumPressDuration = 0.5
         tapGestureRecognize = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
-        tapGestureRecognize?.numberOfTouchesRequired = 2
+        tapGestureRecognize?.numberOfTapsRequired = 2
         
         collectionView?.gestureRecognizers?.forEach({ (ges) in
             if ges.isKind(of: UIPanGestureRecognizer.self) {
@@ -204,9 +206,10 @@ class TimelineLayout: UICollectionViewLayout {
         let location = pan.location(in: collectionView)
         let transition = pan.translation(in: collectionView)
         panDirection = transition.x > 0 ? .right : .left
-        let indexPath = collectionView?.indexPathForItem(at: location)
-        let cell = collectionView?.cellForItem(at: indexPath!) as! VideoItemCollectionViewCell
+        print("1111")
 
+        guard let indexPath = collectionView?.indexPathForItem(at: location) else {return}
+        let cell = collectionView?.cellForItem(at: indexPath) as? VideoItemCollectionViewCell
         if pan.state == .began {
             invalidateLayout()
         }
@@ -214,12 +217,14 @@ class TimelineLayout: UICollectionViewLayout {
             if dragMode == .move {
                 let centerPoint = dragableImageView?.center
                 if selectedIndexPath?.section == 0 {
-                    dragableImageView?.center =
-                            CGPoint(x: centerPoint?.x ?? 0 + transition.x, y: centerPoint?.y ?? 0 + transition.y)
+                    let center = CGPoint(x: (centerPoint?.x)! + transition.x, y: (centerPoint?.y)! + transition.y)
+                    print(center)
+                    dragableImageView?.center = center
                     if swapInProgress == false {
                         swapClips()
                     }
                 } else {
+                    
                     let constrainedPoint = dragableImageView?.center
                     dragableImageView?.center =
                             CGPoint(x: constrainedPoint?.x ?? 0 + transition.x, y: constrainedPoint?.y ?? 0)
@@ -230,11 +235,11 @@ class TimelineLayout: UICollectionViewLayout {
 
                 }
             } else {
-                if indexPath?.section != 0 {
+                if indexPath.section != 0 {
                     return
                 }
-                let timeRange = cell.maxTimeRagne
-                scaleUnit = CGFloat(CMTimeGetSeconds(timeRange?.duration ?? .zero)) / cell.frame.size.width
+                let timeRange = cell!.maxTimeRagne
+                scaleUnit = CGFloat(CMTimeGetSeconds(timeRange?.duration ?? .zero)) / cell!.frame.size.width
                 let selectedIndexPaths = collectionView?.indexPathsForSelectedItems
                 if selectedIndexPaths != nil && selectedIndexPaths?.count ?? 0 > 0 {
                     let selectedIndexPath = selectedIndexPaths?.first
@@ -290,10 +295,12 @@ class TimelineLayout: UICollectionViewLayout {
                 UIView.animate(withDuration: 0.2, animations: {
                     self.dragableImageView?.alpha = 0
                 }) { (_) in
-                    let cell = self.collectionView?.cellForItem(at: self.selectedIndexPath!)
-                    cell?.isSelected = true
-                    self.dragableImageView?.removeFromSuperview()
-                    self.dragableImageView = nil
+                    if self.selectedIndexPath != nil {
+                        guard let cell = self.collectionView?.cellForItem(at: self.selectedIndexPath!) else {return}
+                        cell.isSelected = true
+                        self.dragableImageView?.removeFromSuperview()
+                        self.dragableImageView = nil
+                    }
                 }
                 self.selectedIndexPath = nil
                 self.dragMode = .trim
@@ -302,8 +309,9 @@ class TimelineLayout: UICollectionViewLayout {
     }
 
     func swapClips() {
-        let indexPath = collectionView?.indexPathForItem(at: dragableImageView?.center ?? .zero)
-        let delegate: UICollectionViewDelegateTimelineLayout = collectionView?.delegate as! UICollectionViewDelegateTimelineLayout
+        let center = dragableImageView?.center
+        let indexPath = collectionView?.indexPathForItem(at: center!)
+        guard let delegate: UICollectionViewDelegateTimelineLayout = collectionView?.delegate as? UICollectionViewDelegateTimelineLayout else {return}
         if indexPath != nil && shouldSwapSelectedIndexPath(selected: selectedIndexPath!, with: indexPath!) {
             if !delegate.collectionView(collectionView: collectionView!, canMoveItemAt: indexPath!) {
                 return

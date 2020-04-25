@@ -34,4 +34,10 @@ class VideoItemCollectionViewCell: UICollectionViewCell {
     func isPointInDragHandle(point: CGPoint) -> Bool {
         return false
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        itemView.frame = self.bounds
+    }
 }

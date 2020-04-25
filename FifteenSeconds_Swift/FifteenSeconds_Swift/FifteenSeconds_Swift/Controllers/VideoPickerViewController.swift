@@ -29,8 +29,11 @@ class VideoPickerViewController: UIViewController {
             item.prepare {[weak self] (result) in
                 guard let strongSelf = self else {return}
                 ///
-                strongSelf.initialItemLoaded = true
-                strongSelf.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                DispatchQueue.main.async {
+                    strongSelf.initialItemLoaded = true
+                    strongSelf.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                }
+
             }
             items.append(item)
         }
