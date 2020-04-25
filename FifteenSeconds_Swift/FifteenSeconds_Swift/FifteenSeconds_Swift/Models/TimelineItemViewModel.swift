@@ -24,9 +24,6 @@ class TimelineItemViewModel {
         let maxTimeRange = CMTimeRangeMake(start: .zero, duration: timelineItem?.timeRange?.duration ?? .zero)
         maxWidthInTimeline = GetWidthFor(timeRange: maxTimeRange, scaleFactor: TIMELINE_WIDTH / TIMELINE_SECONDS)
     }
-    
-    
-    
     func udpateTimelineItem() {
         if positionInTimeline?.x ?? 0 > 0 {
             let startTime = GetTime(for: positionInTimeline?.x ?? 0, scaleFactor: TIMELINE_WIDTH / TIMELINE_SECONDS)

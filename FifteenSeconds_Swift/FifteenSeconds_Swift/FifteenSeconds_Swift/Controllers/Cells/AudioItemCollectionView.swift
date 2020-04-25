@@ -17,6 +17,12 @@ class AudioItemCollectionViewCell: UICollectionViewCell {
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        itemView.frame = bounds
+        audioAutomationView.frame = CGRect(x: 0, y: 10, width: frame.width, height: frame.height)
+    }
+    
     func setup() {
         itemView = TimeLineItemView(frame: frame)
         contentView.addSubview(itemView)

@@ -55,7 +55,7 @@ class TimelineDataSource:NSObject, UICollectionViewDataSource {
 //        cell.contentView.autoresizingMask = (.flexibleWidth | .flexibleLeftMargin | .flexibleWidth | .flexibleRightMargin | .flexibleTopMargin | .flexibleHeight | .flexibleBottomMargin)
         if cellId == VideoItemCollectionViewCellID {
             configVideoCell(cell: cell as! VideoItemCollectionViewCell, indexPath: indexPath)
-        } else if cellId == AudioItemTableViewCellID {
+        } else if cellId == AudioItemCollectionViewCellID {
             configAudioCell(cell: cell as! AudioItemCollectionViewCell, indexPath: indexPath)
         } else if cellId == TitleItemCollectionViewCellID {
             configTitleCell(cell: cell as! TimeLineItemCollectionViewCell, indexPath: indexPath)
@@ -76,14 +76,21 @@ class TimelineDataSource:NSObject, UICollectionViewDataSource {
     }
     
     func configAudioCell(cell: AudioItemCollectionViewCell, indexPath: IndexPath) {
+        
         guard let viewModel = timelineItems?[indexPath.section][indexPath.item] as? TimelineItemViewModel else {return}
         guard let item = viewModel.timelineItem as? AudioItem else {return}
         
-        cell.audioAutomationView.audioRamps = item.volumnAutomation
-        cell.audioAutomationView.duration = item.timeRange?.duration
-        cell.itemView.backgroundColor = UIColor(red: 0.361, green: 0.762, blue: 0.366, alpha: 1)
-        
-    }
+        if indexPath.section == MediaTrackType.music.rawValue {
+            
+            cell.audioAutomationView.audioRamps = item.volumnAutomation
+            cell.audioAutomationView.duration = item.timeRange?.duration
+            cell.itemView.backgroundColor = UIColor(red: 0.361, green: 0.762, blue: 0.366, alpha: 1)
+        } else {
+            cell.audioAutomationView.audioRamps = nil
+            cell.audioAutomationView.duration = .zero
+            cell.itemView.backgroundColor = UIColor(red: 0.992, green: 0.785, blue: 0.106, alpha: 1)
+        }
+   }
     
     func configTitleCell(cell: TimeLineItemCollectionViewCell, indexPath: IndexPath) {
         guard let viewModel = timelineItems?[indexPath.section][indexPath.item] as? TimelineItemViewModel else {return}
@@ -97,19 +104,16 @@ class TimelineDataSource:NSObject, UICollectionViewDataSource {
         
         if timelineViewController.transitionEnabled == true && indexPath.section == 0 {
             return indexPath.item % 2 == 0 ? VideoItemCollectionViewCellID : TransitionCollectionViewCellID
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 0 {
             return VideoItemCollectionViewCellID
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 1 {
             return TitleItemCollectionViewCellID
-        } else if indexPath.section == 3 {
+        } else if indexPath.section == 2 || indexPath.section == 3 {
             return AudioItemCollectionViewCellID
         }
         return ""
     }
-    
-    
-    
-    
+ 
 }
 
 extension TimelineDataSource: UICollectionViewDelegateTimelineLayout {
@@ -165,7 +169,7 @@ extension TimelineDataSource: UICollectionViewDelegateTimelineLayout {
     func collectionView(collectionView: UICollectionView, positionForItemAt indexPath: IndexPath) -> CGPoint {
         if indexPath.section == MediaTrackType.commontary.rawValue || indexPath.section == MediaTrackType.title.rawValue {
             guard let viewModel = timelineItems?[indexPath.section][indexPath.item] as? TimelineItemViewModel else {return .zero}
-            return viewModel.positionInTimeline!
+            return viewModel.positionInTimeline ?? .zero
         }
         return .zero
     }
@@ -178,6 +182,7 @@ extension TimelineDataSource: UICollectionViewDelegateTimelineLayout {
         }
     }
     func collectionView(collectionView: UICollectionView, didAdjustTo position: CGPoint, forItemAt indexPath: IndexPath) {
+        
         if indexPath.section == MediaTrackType.commontary.rawValue || indexPath.section == MediaTrackType.title.rawValue {
             guard let viewModel = timelineItems?[indexPath.section][indexPath.item] as? TimelineItemViewModel else {return}
             viewModel.positionInTimeline = position

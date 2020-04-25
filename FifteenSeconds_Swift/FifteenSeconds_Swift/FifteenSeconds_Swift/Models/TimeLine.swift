@@ -22,20 +22,22 @@ class TimeLine {
     var musicItems: [Any]?
     
     func isSimpleTimeline() -> Bool {
-        guard let items = musicItems else {
-            if (transitons?.count ?? 0) > 0 || (titles?.count ?? 0) > 0 {
-                return false
-            }
-            return true
-        }
-        for (_, item) in items.enumerated() {
-            if (item as! AudioItem).volumnAutomation?.count ?? 0 > 0 {
-                return false
-            }
-        }
-        if (transitons?.count ?? 0) > 0 || (titles?.count ?? 0) > 0 {
-            return false
-        }
+        
+        // TODO: 待定
+//        guard let items = musicItems else {
+//            if (transitons?.count ?? 0) > 0 || (titles?.count ?? 0) > 0 {
+//                return false
+//            }
+//            return true
+//        }
+//        for (_, item) in items.enumerated() {
+//            if (item as! AudioItem).volumnAutomation?.count ?? 0 > 0 {
+//                return false
+//            }
+//        }
+//        if (transitons?.count ?? 0) > 0 || (titles?.count ?? 0) > 0 {
+//            return false
+//        }
         return true
     }
 }

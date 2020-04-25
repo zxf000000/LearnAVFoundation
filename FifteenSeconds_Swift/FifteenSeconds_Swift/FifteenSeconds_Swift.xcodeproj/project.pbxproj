@@ -15,6 +15,27 @@
 		4E5DB0CC245044130027C88D /* PlaybackMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DB0CB245044130027C88D /* PlaybackMediator.swift */; };
 		4E5DB0CE245044650027C88D /* TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DB0CD245044650027C88D /* TimeLine.swift */; };
 		4E5DB0D124504B5A0027C88D /* TimeLineLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5DB0D024504B5A0027C88D /* TimeLineLayout.swift */; };
+		4E67E99F2453CC6D009E9500 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E99E2453CC6D009E9500 /* Macro.swift */; };
+		4E67E9B52453D53F009E9500 /* 01_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E67E9AC2453D53F009E9500 /* 01_nebula.mp4 */; };
+		4E67E9B62453D53F009E9500 /* 03_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E67E9AD2453D53F009E9500 /* 03_nebula.mp4 */; };
+		4E67E9B72453D53F009E9500 /* 04_quasar.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E67E9AE2453D53F009E9500 /* 04_quasar.mp4 */; };
+		4E67E9B82453D53F009E9500 /* 02_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E67E9AF2453D53F009E9500 /* 02_blackhole.mp4 */; };
+		4E67E9B92453D53F009E9500 /* 05_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4E67E9B02453D53F009E9500 /* 05_blackhole.mp4 */; };
+		4E67E9BC2453D54D009E9500 /* VoiceOvers in Resources */ = {isa = PBXBuildFile; fileRef = 4E67E9BA2453D54D009E9500 /* VoiceOvers */; };
+		4E67E9BD2453D54D009E9500 /* Music in Resources */ = {isa = PBXBuildFile; fileRef = 4E67E9BB2453D54D009E9500 /* Music */; };
+		4E67E9BF2453E457009E9500 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9BE2453E457009E9500 /* PlayerViewController.swift */; };
+		4E67E9C32453E4AC009E9500 /* PlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9C22453E4AC009E9500 /* PlaybackView.swift */; };
+		4E67E9C52453F285009E9500 /* AVComposition+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9C42453F285009E9500 /* AVComposition+Add.swift */; };
+		4E67E9C724540114009E9500 /* AVPlayerItem+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9C624540114009E9500 /* AVPlayerItem+Add.swift */; };
+		4E67E9C92454023F009E9500 /* String+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9C82454023F009E9500 /* String+Add.swift */; };
+		4E67E9CB245403CF009E9500 /* UIColor+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9CA245403CF009E9500 /* UIColor+Add.swift */; };
+		4E67E9CE24540ADE009E9500 /* BasicComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9CD24540ADD009E9500 /* BasicComposition.swift */; };
+		4E67E9D024540B9E009E9500 /* BasicCompositionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9CF24540B9E009E9500 /* BasicCompositionBuilder.swift */; };
+		4E67E9D324540C5C009E9500 /* CompositionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9D224540C5C009E9500 /* CompositionBuilder.swift */; };
+		4E67E9D524540C91009E9500 /* CompositionBuilderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9D424540C91009E9500 /* CompositionBuilderFactory.swift */; };
+		4E67E9DB24541084009E9500 /* CompositionExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9DA24541084009E9500 /* CompositionExporter.swift */; };
+		4E67E9DD24542FD6009E9500 /* AudioMixComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9DC24542FD6009E9500 /* AudioMixComposition.swift */; };
+		4E67E9DF24543088009E9500 /* AudioMixCompositionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E67E9DE24543088009E9500 /* AudioMixCompositionBuilder.swift */; };
 		4E760B32244FF6F20031998A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E760B31244FF6F20031998A /* AppDelegate.swift */; };
 		4E760B36244FF6F20031998A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E760B35244FF6F20031998A /* ViewController.swift */; };
 		4E760B39244FF6F20031998A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E760B37244FF6F20031998A /* Main.storyboard */; };
@@ -50,15 +71,6 @@
 		4EA705C62451914200AD8BCE /* PlayHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA705C52451914200AD8BCE /* PlayHeaderView.swift */; };
 		4EA705C8245197D300AD8BCE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA705C7245197D300AD8BCE /* Notifications.swift */; };
 		4EA705CA2451B0B600AD8BCE /* TimelineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA705C92451B0B600AD8BCE /* TimelineBuilder.swift */; };
-		B768FC7024508D140094DCCD /* 02 Keep Going.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6524508D130094DCCD /* 02 Keep Going.m4a */; };
-		B768FC7124508D140094DCCD /* 01 Star Gazing.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6624508D130094DCCD /* 01 Star Gazing.m4a */; };
-		B768FC7224508D140094DCCD /* John F. Kennedy.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6824508D130094DCCD /* John F. Kennedy.m4a */; };
-		B768FC7324508D140094DCCD /* Ronald Reagan.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6924508D130094DCCD /* Ronald Reagan.m4a */; };
-		B768FC7424508D140094DCCD /* 01_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6B24508D140094DCCD /* 01_nebula.mp4 */; };
-		B768FC7524508D140094DCCD /* 03_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6C24508D140094DCCD /* 03_nebula.mp4 */; };
-		B768FC7624508D140094DCCD /* 04_quasar.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6D24508D140094DCCD /* 04_quasar.mp4 */; };
-		B768FC7724508D140094DCCD /* 02_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6E24508D140094DCCD /* 02_blackhole.mp4 */; };
-		B768FC7824508D140094DCCD /* 05_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FC6F24508D140094DCCD /* 05_blackhole.mp4 */; };
 		B768FC7C245098300094DCCD /* UIView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B768FC7B245098300094DCCD /* UIView+Add.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +100,27 @@
 		4E5DB0CB245044130027C88D /* PlaybackMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMediator.swift; sourceTree = "<group>"; };
 		4E5DB0CD245044650027C88D /* TimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLine.swift; sourceTree = "<group>"; };
 		4E5DB0D024504B5A0027C88D /* TimeLineLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineLayout.swift; sourceTree = "<group>"; };
+		4E67E99E2453CC6D009E9500 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
+		4E67E9AC2453D53F009E9500 /* 01_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01_nebula.mp4; sourceTree = "<group>"; };
+		4E67E9AD2453D53F009E9500 /* 03_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 03_nebula.mp4; sourceTree = "<group>"; };
+		4E67E9AE2453D53F009E9500 /* 04_quasar.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04_quasar.mp4; sourceTree = "<group>"; };
+		4E67E9AF2453D53F009E9500 /* 02_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02_blackhole.mp4; sourceTree = "<group>"; };
+		4E67E9B02453D53F009E9500 /* 05_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 05_blackhole.mp4; sourceTree = "<group>"; };
+		4E67E9BA2453D54D009E9500 /* VoiceOvers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VoiceOvers; sourceTree = "<group>"; };
+		4E67E9BB2453D54D009E9500 /* Music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Music; sourceTree = "<group>"; };
+		4E67E9BE2453E457009E9500 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		4E67E9C22453E4AC009E9500 /* PlaybackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackView.swift; sourceTree = "<group>"; };
+		4E67E9C42453F285009E9500 /* AVComposition+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVComposition+Add.swift"; sourceTree = "<group>"; };
+		4E67E9C624540114009E9500 /* AVPlayerItem+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+Add.swift"; sourceTree = "<group>"; };
+		4E67E9C82454023F009E9500 /* String+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Add.swift"; sourceTree = "<group>"; };
+		4E67E9CA245403CF009E9500 /* UIColor+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Add.swift"; sourceTree = "<group>"; };
+		4E67E9CD24540ADD009E9500 /* BasicComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicComposition.swift; sourceTree = "<group>"; };
+		4E67E9CF24540B9E009E9500 /* BasicCompositionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCompositionBuilder.swift; sourceTree = "<group>"; };
+		4E67E9D224540C5C009E9500 /* CompositionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionBuilder.swift; sourceTree = "<group>"; };
+		4E67E9D424540C91009E9500 /* CompositionBuilderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionBuilderFactory.swift; sourceTree = "<group>"; };
+		4E67E9DA24541084009E9500 /* CompositionExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionExporter.swift; sourceTree = "<group>"; };
+		4E67E9DC24542FD6009E9500 /* AudioMixComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMixComposition.swift; sourceTree = "<group>"; };
+		4E67E9DE24543088009E9500 /* AudioMixCompositionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMixCompositionBuilder.swift; sourceTree = "<group>"; };
 		4E760B2E244FF6F20031998A /* FifteenSeconds_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FifteenSeconds_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E760B31244FF6F20031998A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E760B35244FF6F20031998A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -129,15 +162,6 @@
 		4EA705C52451914200AD8BCE /* PlayHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayHeaderView.swift; sourceTree = "<group>"; };
 		4EA705C7245197D300AD8BCE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4EA705C92451B0B600AD8BCE /* TimelineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineBuilder.swift; sourceTree = "<group>"; };
-		B768FC6524508D130094DCCD /* 02 Keep Going.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02 Keep Going.m4a"; sourceTree = "<group>"; };
-		B768FC6624508D130094DCCD /* 01 Star Gazing.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01 Star Gazing.m4a"; sourceTree = "<group>"; };
-		B768FC6824508D130094DCCD /* John F. Kennedy.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "John F. Kennedy.m4a"; sourceTree = "<group>"; };
-		B768FC6924508D130094DCCD /* Ronald Reagan.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ronald Reagan.m4a"; sourceTree = "<group>"; };
-		B768FC6B24508D140094DCCD /* 01_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01_nebula.mp4; sourceTree = "<group>"; };
-		B768FC6C24508D140094DCCD /* 03_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 03_nebula.mp4; sourceTree = "<group>"; };
-		B768FC6D24508D140094DCCD /* 04_quasar.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04_quasar.mp4; sourceTree = "<group>"; };
-		B768FC6E24508D140094DCCD /* 02_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02_blackhole.mp4; sourceTree = "<group>"; };
-		B768FC6F24508D140094DCCD /* 05_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 05_blackhole.mp4; sourceTree = "<group>"; };
 		B768FC7B245098300094DCCD /* UIView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Add.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +196,49 @@
 				4E5DB0D024504B5A0027C88D /* TimeLineLayout.swift */,
 			);
 			path = Layouts;
+			sourceTree = "<group>";
+		};
+		4E67E9A42453D53F009E9500 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				4E67E9BB2453D54D009E9500 /* Music */,
+				4E67E9BA2453D54D009E9500 /* VoiceOvers */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		4E67E9AB2453D53F009E9500 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				4E67E9AC2453D53F009E9500 /* 01_nebula.mp4 */,
+				4E67E9AD2453D53F009E9500 /* 03_nebula.mp4 */,
+				4E67E9AE2453D53F009E9500 /* 04_quasar.mp4 */,
+				4E67E9AF2453D53F009E9500 /* 02_blackhole.mp4 */,
+				4E67E9B02453D53F009E9500 /* 05_blackhole.mp4 */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		4E67E9CC24540ACB009E9500 /* private */ = {
+			isa = PBXGroup;
+			children = (
+				4E67E9CD24540ADD009E9500 /* BasicComposition.swift */,
+				4E67E9CF24540B9E009E9500 /* BasicCompositionBuilder.swift */,
+			);
+			path = private;
+			sourceTree = "<group>";
+		};
+		4E67E9D124540C3F009E9500 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				4E67E9CC24540ACB009E9500 /* private */,
+				4E67E9D224540C5C009E9500 /* CompositionBuilder.swift */,
+				4E67E9D424540C91009E9500 /* CompositionBuilderFactory.swift */,
+				4EA705C92451B0B600AD8BCE /* TimelineBuilder.swift */,
+				4E67E9DC24542FD6009E9500 /* AudioMixComposition.swift */,
+				4E67E9DE24543088009E9500 /* AudioMixCompositionBuilder.swift */,
+			);
+			path = Builders;
 			sourceTree = "<group>";
 		};
 		4E760B25244FF6F20031998A = {
@@ -210,6 +277,7 @@
 				4E760B3A244FF6F50031998A /* Assets.xcassets */,
 				4E760B3C244FF6F50031998A /* LaunchScreen.storyboard */,
 				4E760B3F244FF6F50031998A /* Info.plist */,
+				4E67E99E2453CC6D009E9500 /* Macro.swift */,
 			);
 			path = FifteenSeconds_Swift;
 			sourceTree = "<group>";
@@ -235,8 +303,8 @@
 		4E760B61244FFAAE0031998A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B768FC6324508D130094DCCD /* Audio */,
-				B768FC6A24508D140094DCCD /* Video */,
+				4E67E9A42453D53F009E9500 /* Audio */,
+				4E67E9AB2453D53F009E9500 /* Video */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -265,6 +333,8 @@
 				4E760B81244FFD390031998A /* AudioPickerViewController.swift */,
 				4EA705AD2451377E00AD8BCE /* TimeLineViewController.swift */,
 				4EA705C124516F1400AD8BCE /* TransitionViewController.swift */,
+				4E67E9BE2453E457009E9500 /* PlayerViewController.swift */,
+				4E67E9DA24541084009E9500 /* CompositionExporter.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -272,6 +342,7 @@
 		4E760B7B244FFB320031998A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4E67E9D124540C3F009E9500 /* Builders */,
 				4E5DB0C124501A080027C88D /* VideoItem.swift */,
 				4E5DB0C324501A360027C88D /* VideoTransition.swift */,
 				4E5DB0C524501C520027C88D /* TimeLineItem.swift */,
@@ -286,7 +357,6 @@
 				4EA705BD245149E400AD8BCE /* CompositionLayer.swift */,
 				4EA705BF24514A5C00AD8BCE /* TimelineDataSource.swift */,
 				4EA705C7245197D300AD8BCE /* Notifications.swift */,
-				4EA705C92451B0B600AD8BCE /* TimelineBuilder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +368,7 @@
 				4E760B94245015F40031998A /* ThumbnailsView.swift */,
 				4EA705B7245143A300AD8BCE /* TransitionButton.swift */,
 				4EA705C52451914200AD8BCE /* PlayHeaderView.swift */,
+				4E67E9C22453E4AC009E9500 /* PlaybackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -319,50 +390,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		B768FC6324508D130094DCCD /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				B768FC6424508D130094DCCD /* Music */,
-				B768FC6724508D130094DCCD /* VoiceOvers */,
-			);
-			path = Audio;
-			sourceTree = "<group>";
-		};
-		B768FC6424508D130094DCCD /* Music */ = {
-			isa = PBXGroup;
-			children = (
-				B768FC6524508D130094DCCD /* 02 Keep Going.m4a */,
-				B768FC6624508D130094DCCD /* 01 Star Gazing.m4a */,
-			);
-			path = Music;
-			sourceTree = "<group>";
-		};
-		B768FC6724508D130094DCCD /* VoiceOvers */ = {
-			isa = PBXGroup;
-			children = (
-				B768FC6824508D130094DCCD /* John F. Kennedy.m4a */,
-				B768FC6924508D130094DCCD /* Ronald Reagan.m4a */,
-			);
-			path = VoiceOvers;
-			sourceTree = "<group>";
-		};
-		B768FC6A24508D140094DCCD /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				B768FC6B24508D140094DCCD /* 01_nebula.mp4 */,
-				B768FC6C24508D140094DCCD /* 03_nebula.mp4 */,
-				B768FC6D24508D140094DCCD /* 04_quasar.mp4 */,
-				B768FC6E24508D140094DCCD /* 02_blackhole.mp4 */,
-				B768FC6F24508D140094DCCD /* 05_blackhole.mp4 */,
-			);
-			path = Video;
-			sourceTree = "<group>";
-		};
 		B768FC792450980B0094DCCD /* Categories */ = {
 			isa = PBXGroup;
 			children = (
 				B768FC7B245098300094DCCD /* UIView+Add.swift */,
 				4EA705C324518B3200AD8BCE /* Array+Add.swift */,
+				4E67E9C42453F285009E9500 /* AVComposition+Add.swift */,
+				4E67E9C624540114009E9500 /* AVPlayerItem+Add.swift */,
+				4E67E9C82454023F009E9500 /* String+Add.swift */,
+				4E67E9CA245403CF009E9500 /* UIColor+Add.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -472,19 +508,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B768FC7024508D140094DCCD /* 02 Keep Going.m4a in Resources */,
 				4E760B91245015CA0031998A /* VideoItemTableViewCell.xib in Resources */,
-				B768FC7524508D140094DCCD /* 03_nebula.mp4 in Resources */,
-				B768FC7124508D140094DCCD /* 01 Star Gazing.m4a in Resources */,
-				B768FC7724508D140094DCCD /* 02_blackhole.mp4 in Resources */,
-				B768FC7624508D140094DCCD /* 04_quasar.mp4 in Resources */,
+				4E67E9B62453D53F009E9500 /* 03_nebula.mp4 in Resources */,
+				4E67E9B82453D53F009E9500 /* 02_blackhole.mp4 in Resources */,
+				4E67E9B72453D53F009E9500 /* 04_quasar.mp4 in Resources */,
 				4E760B93245015D00031998A /* AudioItemTableViewCell.xib in Resources */,
-				B768FC7224508D140094DCCD /* John F. Kennedy.m4a in Resources */,
-				B768FC7424508D140094DCCD /* 01_nebula.mp4 in Resources */,
-				B768FC7324508D140094DCCD /* Ronald Reagan.m4a in Resources */,
-				B768FC7824508D140094DCCD /* 05_blackhole.mp4 in Resources */,
+				4E67E9B52453D53F009E9500 /* 01_nebula.mp4 in Resources */,
+				4E67E9BD2453D54D009E9500 /* Music in Resources */,
+				4E67E9B92453D53F009E9500 /* 05_blackhole.mp4 in Resources */,
 				4E760B3E244FF6F50031998A /* LaunchScreen.storyboard in Resources */,
 				4E760B3B244FF6F50031998A /* Assets.xcassets in Resources */,
+				4E67E9BC2453D54D009E9500 /* VoiceOvers in Resources */,
 				4E760B39244FF6F20031998A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,6 +553,7 @@
 				4E5DB0C224501A080027C88D /* VideoItem.swift in Sources */,
 				4EA705C62451914200AD8BCE /* PlayHeaderView.swift in Sources */,
 				4EA705A224512F5F00AD8BCE /* TimeLineItemView.swift in Sources */,
+				4E67E9CB245403CF009E9500 /* UIColor+Add.swift in Sources */,
 				4EA705BE245149E400AD8BCE /* CompositionLayer.swift in Sources */,
 				4EA705AE2451377E00AD8BCE /* TimeLineViewController.swift in Sources */,
 				4E760B86245013530031998A /* VideoItemTableViewCell.swift in Sources */,
@@ -526,25 +561,38 @@
 				4EA705C8245197D300AD8BCE /* Notifications.swift in Sources */,
 				4EA705BC2451453F00AD8BCE /* TimelineItemViewModel.swift in Sources */,
 				4E5DB0C624501C520027C88D /* TimeLineItem.swift in Sources */,
+				4E67E9C92454023F009E9500 /* String+Add.swift in Sources */,
 				4EA705C424518B3200AD8BCE /* Array+Add.swift in Sources */,
 				4EA705B624513B2B00AD8BCE /* Functions.swift in Sources */,
+				4E67E99F2453CC6D009E9500 /* Macro.swift in Sources */,
 				4EA705A8245130BF00AD8BCE /* TimeLineItemCollectionViewCell.swift in Sources */,
+				4E67E9BF2453E457009E9500 /* PlayerViewController.swift in Sources */,
 				4E760B82244FFD390031998A /* AudioPickerViewController.swift in Sources */,
 				B768FC7C245098300094DCCD /* UIView+Add.swift in Sources */,
+				4E67E9C32453E4AC009E9500 /* PlaybackView.swift in Sources */,
 				4E760B7E244FFCAA0031998A /* PickerTabBarController.swift in Sources */,
 				4E5DB0CC245044130027C88D /* PlaybackMediator.swift in Sources */,
 				4EA705C224516F1400AD8BCE /* TransitionViewController.swift in Sources */,
+				4E67E9CE24540ADE009E9500 /* BasicComposition.swift in Sources */,
+				4E67E9DF24543088009E9500 /* AudioMixCompositionBuilder.swift in Sources */,
+				4E67E9C52453F285009E9500 /* AVComposition+Add.swift in Sources */,
 				4EA705BA245144B200AD8BCE /* TransitionCollectionViewCell.swift in Sources */,
 				4E5DB0C424501A360027C88D /* VideoTransition.swift in Sources */,
 				4EA705C024514A5C00AD8BCE /* TimelineDataSource.swift in Sources */,
+				4E67E9DD24542FD6009E9500 /* AudioMixComposition.swift in Sources */,
 				4E760B8C245013720031998A /* AudioItemTableViewCell.swift in Sources */,
+				4E67E9C724540114009E9500 /* AVPlayerItem+Add.swift in Sources */,
 				4EA705B2245139AF00AD8BCE /* VolumeAtomationView.swift in Sources */,
 				4EA705B8245143A300AD8BCE /* TransitionButton.swift in Sources */,
 				4E760B95245015F40031998A /* ThumbnailsView.swift in Sources */,
+				4E67E9DB24541084009E9500 /* CompositionExporter.swift in Sources */,
 				4E760B36244FF6F20031998A /* ViewController.swift in Sources */,
 				4E5DB0CA24503A9C0027C88D /* AudioItem.swift in Sources */,
 				4EA705AC245135F600AD8BCE /* AppSettings.swift in Sources */,
+				4E67E9D324540C5C009E9500 /* CompositionBuilder.swift in Sources */,
 				4E760B80244FFD300031998A /* VideoPickerViewController.swift in Sources */,
+				4E67E9D024540B9E009E9500 /* BasicCompositionBuilder.swift in Sources */,
+				4E67E9D524540C91009E9500 /* CompositionBuilderFactory.swift in Sources */,
 				4E760B32244FF6F20031998A /* AppDelegate.swift in Sources */,
 				4EA705AA2451314B00AD8BCE /* VideoItemCollectionViewCell.swift in Sources */,
 			);

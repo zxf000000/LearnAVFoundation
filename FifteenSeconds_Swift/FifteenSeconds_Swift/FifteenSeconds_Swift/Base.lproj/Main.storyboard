@@ -18,7 +18,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="thS-gS-4aP"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Fifteen Seconds" id="tgo-wN-jKL">
+                        <barButtonItem key="leftBarButtonItem" title="Export" image="shift.fill" catalog="system" id="7xE-vH-UvK">
+                            <connections>
+                                <action selector="tapExport:" destination="BYZ-38-t0r" id="aFQ-NL-rQB"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xps-yz-N81">
                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -26,6 +34,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -208,11 +217,93 @@
             </objects>
             <point key="canvasLocation" x="-532" y="-36"/>
         </scene>
+        <!--Player View Controller-->
+        <scene sceneID="qV6-eR-tdx">
+            <objects>
+                <viewController storyboardIdentifier="PlayerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gh7-F1-ksI" customClass="PlayerViewController" customModule="FifteenSeconds_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5y5-OA-Qb7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xEF-u2-P7y">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem title="export" id="Emq-1C-zY7">
+                                        <connections>
+                                            <action selector="export:" destination="gh7-F1-ksI" id="77t-TR-gHm"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Luj-fJ-c8w" customClass="PlaybackView" customModule="FifteenSeconds_Swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="6iQ-QE-wD5">
+                                        <rect key="frame" x="197" y="309" width="20" height="20"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="esL-W5-khc">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="hTd-kC-vQ9"/>
+                                        </constraints>
+                                    </progressView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="esL-W5-khc" secondAttribute="trailing" id="3sF-va-zaO"/>
+                                    <constraint firstItem="esL-W5-khc" firstAttribute="top" secondItem="Luj-fJ-c8w" secondAttribute="top" id="UxC-fp-BIF"/>
+                                    <constraint firstItem="6iQ-QE-wD5" firstAttribute="centerX" secondItem="Luj-fJ-c8w" secondAttribute="centerX" id="e0Z-L4-pMb"/>
+                                    <constraint firstItem="6iQ-QE-wD5" firstAttribute="centerY" secondItem="Luj-fJ-c8w" secondAttribute="centerY" id="qbB-dZ-P3q"/>
+                                    <constraint firstItem="esL-W5-khc" firstAttribute="leading" secondItem="Luj-fJ-c8w" secondAttribute="leading" id="zWZ-05-LWA"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJ0-kl-eII">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Y2E-Fs-IYI"/>
+                                </constraints>
+                                <state key="normal" image="mp_play_button"/>
+                                <state key="selected" image="pv_stop_icon"/>
+                                <connections>
+                                    <action selector="play:" destination="gh7-F1-ksI" eventType="touchUpInside" id="t6H-1t-EQ1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="gJ0-kl-eII" firstAttribute="leading" secondItem="gRh-Zj-ub6" secondAttribute="leading" id="9nh-Lr-g4a"/>
+                            <constraint firstItem="Luj-fJ-c8w" firstAttribute="top" secondItem="xEF-u2-P7y" secondAttribute="bottom" id="DUv-mx-aiU"/>
+                            <constraint firstItem="xEF-u2-P7y" firstAttribute="top" secondItem="gRh-Zj-ub6" secondAttribute="top" id="UZL-Yh-utZ"/>
+                            <constraint firstItem="gJ0-kl-eII" firstAttribute="top" secondItem="Luj-fJ-c8w" secondAttribute="bottom" id="WIu-yl-Jks"/>
+                            <constraint firstItem="gRh-Zj-ub6" firstAttribute="trailing" secondItem="gJ0-kl-eII" secondAttribute="trailing" id="fNz-Ej-bns"/>
+                            <constraint firstItem="xEF-u2-P7y" firstAttribute="width" secondItem="5y5-OA-Qb7" secondAttribute="width" id="kP4-mb-70d"/>
+                            <constraint firstItem="gRh-Zj-ub6" firstAttribute="bottom" secondItem="Luj-fJ-c8w" secondAttribute="bottom" constant="50" id="kZh-T3-yzc"/>
+                            <constraint firstItem="xEF-u2-P7y" firstAttribute="centerX" secondItem="gRh-Zj-ub6" secondAttribute="centerX" id="lc0-ix-xt8"/>
+                            <constraint firstItem="Luj-fJ-c8w" firstAttribute="leading" secondItem="gRh-Zj-ub6" secondAttribute="leading" id="sh6-3N-KFk"/>
+                            <constraint firstItem="gRh-Zj-ub6" firstAttribute="trailing" secondItem="Luj-fJ-c8w" secondAttribute="trailing" id="yTR-ry-UFT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gRh-Zj-ub6"/>
+                    </view>
+                    <connections>
+                        <outlet property="indicatorView" destination="6iQ-QE-wD5" id="10b-9B-nJl"/>
+                        <outlet property="playButton" destination="gJ0-kl-eII" id="Dfy-HB-lTj"/>
+                        <outlet property="playbackView" destination="Luj-fJ-c8w" id="Aht-Pp-bZg"/>
+                        <outlet property="progressView" destination="esL-W5-khc" id="1J1-Ae-RBm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iha-Tm-8Mv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3386" y="-332"/>
+        </scene>
     </scenes>
     <resources>
         <image name="THTabBarAudio" width="25" height="25"/>
         <image name="THTabBarAudio_selected" width="25" height="25"/>
         <image name="THTabBarVideo" width="21" height="25"/>
         <image name="THTabBarVideo_selected" width="21" height="25"/>
+        <image name="mp_play_button" width="39" height="39"/>
+        <image name="pv_stop_icon" width="18" height="14"/>
+        <image name="shift.fill" catalog="system" width="128" height="106"/>
     </resources>
 </document>

@@ -182,7 +182,7 @@ class TimeLineViewController: UIViewController {
         let model = TimelineItemViewModel(timeline: item)
         
         var indexPaths = [IndexPath]()
-        if track == .video && transitionEnabled == true && items?.count ?? 0 > 0 {
+        if track == .video && transitionEnabled == true && (items?.count)! > 0 {
             let transition = VideoTransition.dissolveTransition(with: CMTime(seconds: 1, preferredTimescale: 2))
             items?.append(transition)
             let indexPath = IndexPath(item: (items?.count ?? 0 - 1), section: track.rawValue)
@@ -195,15 +195,14 @@ class TimeLineViewController: UIViewController {
         }
         
         items?.append(model)
-        let indexPath = IndexPath(item: items?.count ?? 0 - 1, section: track.rawValue)
+        let indexPath = IndexPath(item: (items?.count)! - 1, section: track.rawValue)
         
         timelineDataSource?.timelineItems?[track.rawValue] = items!
         indexPaths.append(indexPath)
-//        collectionView.insertItems(at: indexPaths)
-        collectionView.reloadData()
+        collectionView.insertItems(at: indexPaths)
     }
     
-    func currentTimeLine() -> TimeLine {
+    open func currentTimeLine() -> TimeLine {
         guard let items = timelineDataSource?.timelineItems else {return TimeLine()}
         return TimelineBuilder.buildTimeline(with: items as! [[TimelineItemViewModel]])
     }

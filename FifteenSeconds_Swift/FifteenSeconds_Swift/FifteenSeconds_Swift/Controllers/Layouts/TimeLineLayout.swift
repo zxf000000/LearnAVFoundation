@@ -78,7 +78,7 @@ class TimelineLayout: UICollectionViewLayout {
     private var selectedIndexPath: IndexPath?
     private var dragableImageView: UIImageView?
     
-    private var swapInProgress: Bool?
+    private var swapInProgress: Bool? = false
     private var dragMode: DragMode?
     
     private var trimming: Bool?
@@ -111,6 +111,7 @@ class TimelineLayout: UICollectionViewLayout {
         let trackCount = collectionView?.numberOfSections
         for track in 0..<trackCount! {
             let itemCount = collectionView?.numberOfItems(inSection: track)
+            
             for item in 0..<itemCount! {
                 let indexPath = IndexPath(item: item, section: track)
                 let attributes = TimelineLayoutAttribute(forCellWith: indexPath)
@@ -139,7 +140,7 @@ class TimelineLayout: UICollectionViewLayout {
                 maxTrackWidth = xPos!
             }
             xPos = trackInsets?.left
-            yPos = trackHeight!
+            yPos += trackHeight!
         }
         self.contentSize = CGSize(width: maxTrackWidth, height: CGFloat(trackCount!) * self.trackHeight!);
         caculateLayout = layoutDic
@@ -206,7 +207,6 @@ class TimelineLayout: UICollectionViewLayout {
         let location = pan.location(in: collectionView)
         let transition = pan.translation(in: collectionView)
         panDirection = transition.x > 0 ? .right : .left
-        print("1111")
 
         guard let indexPath = collectionView?.indexPathForItem(at: location) else {return}
         let cell = collectionView?.cellForItem(at: indexPath) as? VideoItemCollectionViewCell
@@ -218,7 +218,6 @@ class TimelineLayout: UICollectionViewLayout {
                 let centerPoint = dragableImageView?.center
                 if selectedIndexPath?.section == 0 {
                     let center = CGPoint(x: (centerPoint?.x)! + transition.x, y: (centerPoint?.y)! + transition.y)
-                    print(center)
                     dragableImageView?.center = center
                     if swapInProgress == false {
                         swapClips()
@@ -307,13 +306,15 @@ class TimelineLayout: UICollectionViewLayout {
             }
         }
     }
-
+    
     func swapClips() {
+
         let center = dragableImageView?.center
-        let indexPath = collectionView?.indexPathForItem(at: center!)
-        guard let delegate: UICollectionViewDelegateTimelineLayout = collectionView?.delegate as? UICollectionViewDelegateTimelineLayout else {return}
-        if indexPath != nil && shouldSwapSelectedIndexPath(selected: selectedIndexPath!, with: indexPath!) {
-            if !delegate.collectionView(collectionView: collectionView!, canMoveItemAt: indexPath!) {
+        guard let indexPath = collectionView?.indexPathForItem(at: center!) else {return}
+        guard let delegate = collectionView?.delegate as? UICollectionViewDelegateTimelineLayout else {return}
+        
+        if shouldSwapSelectedIndexPath(selected: selectedIndexPath!, with: indexPath) {
+            if !delegate.collectionView(collectionView: collectionView!, canMoveItemAt: indexPath) {
                 return
             }
             swapInProgress = true

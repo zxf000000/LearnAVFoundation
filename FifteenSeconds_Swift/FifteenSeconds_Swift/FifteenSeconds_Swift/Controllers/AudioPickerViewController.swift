@@ -74,7 +74,7 @@ class AudioPickerViewController: UIViewController {
 
     
     func musicURLs() -> [URL] {
-        return Bundle.main.urls(forResourcesWithExtension: "m4a", subdirectory: nil)!
+        return Bundle.main.urls(forResourcesWithExtension: "m4a", subdirectory: "Music")!
     }
 
     func voiceOverURLs() -> [URL] {
@@ -93,7 +93,8 @@ extension AudioPickerViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let item = allAudioItems?[indexPath.section][indexPath.row] else {return}
-        playbackMediator?.addMediaItem(item: item, toTimelineTrack: .music)
+        let type = indexPath.section == 0 ? MediaTrackType.music : MediaTrackType.commontary
+        playbackMediator?.addMediaItem(item: item, toTimelineTrack: type)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
