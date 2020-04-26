@@ -11,8 +11,8 @@ import CoreMedia
 
 enum VideoTransitionType: Int {
     case none = 0
-    case fadeIn
-    case fadeOut
+    
+    case wipe
     case dissolve
     case push
 }
@@ -33,19 +33,19 @@ struct VideoTransition {
     var duration: CMTime
     var direction: PushTransitionDirection
         
-    static func fadeInTransition(with duration: CMTime) -> Self {
-        var transition = Self()
-        transition.type = .fadeIn
-        transition.duration = duration
-        return transition
-    }
-    
-    static func fadeOutTransition(with duration: CMTime) -> Self {
-        var transition = Self()
-        transition.type = .fadeOut
-        transition.duration = duration
-        return transition
-    }
+//    static func fadeInTransition(with duration: CMTime) -> Self {
+//        var transition = Self()
+//        transition.type = .fadeIn
+//        transition.duration = duration
+//        return transition
+//    }
+//
+//    static func fadeOutTransition(with duration: CMTime) -> Self {
+//        var transition = Self()
+//        transition.type = .fadeOut
+//        transition.duration = duration
+//        return transition
+//    }
     
     static func dissolveTransition(with duration: CMTime) -> Self {
         var transition = Self()

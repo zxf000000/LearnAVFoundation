@@ -13,6 +13,11 @@ import UIKit
 let TIMELINE_SECONDS: CGFloat = 15.0
 let TIMELINE_WIDTH: CGFloat = UIScreen.main.bounds.width - 10
 
+
+let DefaultFadeInOutTime: CMTime = CMTimeMake(value: 3, timescale: 2)   // 1.5 seconds
+let DefaultDuckingFadeInOutTime = CMTimeMake(value: 1, timescale: 2)    // .5 seconds
+let DefaultTransitionDuration = CMTimeMake(value: 1, timescale: 1)      // 1 second
+
 func GetWidthFor(timeRange: CMTimeRange, scaleFactor: CGFloat) -> CGFloat {
     return CGFloat(CMTimeGetSeconds(timeRange.duration)) * scaleFactor
 }

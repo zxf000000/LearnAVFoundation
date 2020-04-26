@@ -72,6 +72,9 @@
 		4EA705C8245197D300AD8BCE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA705C7245197D300AD8BCE /* Notifications.swift */; };
 		4EA705CA2451B0B600AD8BCE /* TimelineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA705C92451B0B600AD8BCE /* TimelineBuilder.swift */; };
 		B768FC7C245098300094DCCD /* UIView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = B768FC7B245098300094DCCD /* UIView+Add.swift */; };
+		B768FC7E24548A110094DCCD /* TransitionComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B768FC7D24548A110094DCCD /* TransitionComposition.swift */; };
+		B768FC8024548B100094DCCD /* TransitionCompositionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B768FC7F24548B100094DCCD /* TransitionCompositionBuilder.swift */; };
+		B768FC822455541A0094DCCD /* TransitionInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B768FC812455541A0094DCCD /* TransitionInstructions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +166,9 @@
 		4EA705C7245197D300AD8BCE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4EA705C92451B0B600AD8BCE /* TimelineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineBuilder.swift; sourceTree = "<group>"; };
 		B768FC7B245098300094DCCD /* UIView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Add.swift"; sourceTree = "<group>"; };
+		B768FC7D24548A110094DCCD /* TransitionComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionComposition.swift; sourceTree = "<group>"; };
+		B768FC7F24548B100094DCCD /* TransitionCompositionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCompositionBuilder.swift; sourceTree = "<group>"; };
+		B768FC812455541A0094DCCD /* TransitionInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionInstructions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +243,8 @@
 				4EA705C92451B0B600AD8BCE /* TimelineBuilder.swift */,
 				4E67E9DC24542FD6009E9500 /* AudioMixComposition.swift */,
 				4E67E9DE24543088009E9500 /* AudioMixCompositionBuilder.swift */,
+				B768FC7D24548A110094DCCD /* TransitionComposition.swift */,
+				B768FC7F24548B100094DCCD /* TransitionCompositionBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -357,6 +365,7 @@
 				4EA705BD245149E400AD8BCE /* CompositionLayer.swift */,
 				4EA705BF24514A5C00AD8BCE /* TimelineDataSource.swift */,
 				4EA705C7245197D300AD8BCE /* Notifications.swift */,
+				B768FC812455541A0094DCCD /* TransitionInstructions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -548,6 +557,7 @@
 				4E5DB0CE245044650027C88D /* TimeLine.swift in Sources */,
 				4E5DB0D124504B5A0027C88D /* TimeLineLayout.swift in Sources */,
 				4EA705CA2451B0B600AD8BCE /* TimelineBuilder.swift in Sources */,
+				B768FC822455541A0094DCCD /* TransitionInstructions.swift in Sources */,
 				4E5DB0C824501E470027C88D /* MediaItem.swift in Sources */,
 				4EA705B424513A3C00AD8BCE /* VolumeAutomation.swift in Sources */,
 				4E5DB0C224501A080027C88D /* VideoItem.swift in Sources */,
@@ -561,6 +571,7 @@
 				4EA705C8245197D300AD8BCE /* Notifications.swift in Sources */,
 				4EA705BC2451453F00AD8BCE /* TimelineItemViewModel.swift in Sources */,
 				4E5DB0C624501C520027C88D /* TimeLineItem.swift in Sources */,
+				B768FC7E24548A110094DCCD /* TransitionComposition.swift in Sources */,
 				4E67E9C92454023F009E9500 /* String+Add.swift in Sources */,
 				4EA705C424518B3200AD8BCE /* Array+Add.swift in Sources */,
 				4EA705B624513B2B00AD8BCE /* Functions.swift in Sources */,
@@ -590,6 +601,7 @@
 				4E5DB0CA24503A9C0027C88D /* AudioItem.swift in Sources */,
 				4EA705AC245135F600AD8BCE /* AppSettings.swift in Sources */,
 				4E67E9D324540C5C009E9500 /* CompositionBuilder.swift in Sources */,
+				B768FC8024548B100094DCCD /* TransitionCompositionBuilder.swift in Sources */,
 				4E760B80244FFD300031998A /* VideoPickerViewController.swift in Sources */,
 				4E67E9D024540B9E009E9500 /* BasicCompositionBuilder.swift in Sources */,
 				4E67E9D524540C91009E9500 /* CompositionBuilderFactory.swift in Sources */,
