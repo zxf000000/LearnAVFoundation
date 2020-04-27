@@ -33,6 +33,8 @@ class ViewController: UIViewController {
     
     var assets: [AVAsset]!
     
+    var timer: Timer!
+    
     var composition: AVMutableComposition!
     
 
@@ -52,6 +54,10 @@ class ViewController: UIViewController {
         setupView()
 
         setupPlayer()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { (timer) in
+            print(self.player.status.rawValue)
+        })
     }
 
     @objc
@@ -164,15 +170,12 @@ class ViewController: UIViewController {
             let trackIndex = i % 2
             let asset = assets[i]
             let currentTrack = videoTracks[trackIndex]
-            
-            let anotherTrack = videoTracks[1-trackIndex]
-            
+                        
             let assetTrack = asset.tracks(withMediaType: .video).first
             
             let assetTimeRange = CMTimeRangeMake(start: .zero, duration: asset.duration)
             try! currentTrack?.insertTimeRange(assetTimeRange, of: assetTrack!, at: cursorTime)
-            anotherTrack?.insertEmptyTimeRange(CMTimeRangeMake(start: CMTimeAdd(assetTimeRange.start, cursorTime), duration: assetTimeRange.duration))
-            
+                        
             cursorTime = CMTimeAdd(cursorTime, assetTimeRange.duration)
             cursorTime = CMTimeSubtract(cursorTime, transitionDuration)
         }
@@ -229,14 +232,12 @@ class ViewController: UIViewController {
         player = AVPlayer(playerItem: playerItemA)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = CGRect(x: 0, y: segment.frame.maxY + 20, width: view.bounds.width, height: 300)
-        player.externalPlaybackVideoGravity = .resizeAspect
         view.layer.addSublayer(playerLayer)
 
         playerItemA.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         playerItemB.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         playerItemC.addObserver(self, forKeyPath: "status", options: .new, context: nil)
     }
-
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         let playerItem: AVPlayerItem = (player.currentItem)!
