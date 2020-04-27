@@ -7,9 +7,12 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 class ViewController: UIViewController {
 
+    var videoDuration = CMTimeMake(value: 5, timescale: 1)
+    
     var player: AVPlayer!
     
     var slider: UISlider!
@@ -21,6 +24,8 @@ class ViewController: UIViewController {
     var compositionResultItem: AVPlayerItem!
     
     var videoComposition: AVMutableVideoComposition!
+    
+    var debugView: APLCompositionDebugView!
     
     var assetA: AVAsset!
     var assetB: AVAsset!
@@ -39,8 +44,8 @@ class ViewController: UIViewController {
     
 
     var videoNames = [
-        "01_nebula.mp4",
-        "02_blackhole.mp4",
+        "test.mp4",
+        "test1.mp4",
         "04_quasar.mp4"
     ]
 
@@ -54,10 +59,6 @@ class ViewController: UIViewController {
         setupView()
 
         setupPlayer()
-
-        timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { (timer) in
-            print(self.player.status.rawValue)
-        })
     }
 
     @objc
@@ -96,12 +97,39 @@ class ViewController: UIViewController {
         
         let videoComposition = buildVideoComposition()
 
-        compositionResultItem = AVPlayerItem(asset: composition)
+        compositionResultItem = AVPlayerItem(asset: composition, automaticallyLoadedAssetKeys: ["tracks","duration","commonMetadata"])
         compositionResultItem.videoComposition = videoComposition
         compositionResultItem.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+        player = AVPlayer(playerItem: compositionResultItem)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = CGRect(x: 0, y: segment.frame.maxY + 20, width: view.bounds.width, height: 300)
+        view.layer.addSublayer(playerLayer)
         
-        player.replaceCurrentItem(with: compositionResultItem)
+//        debugView.player = player
+//        debugView.synchronize(to: composition, videoComposition: videoComposition, audioMix: nil)
+//
+//        debugView.frame = CGRect(x: 0, y: view.bounds.height - 350, width: view.bounds.width, height: 300)
+//
+//
+//        debugView.setNeedsDisplay()
+//
+        
+        
+//        player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 4), queue: DispatchQueue.main) { (time) in
+//            print(CMTimeGetSeconds(time))
+//        }
+        
+        let exportSession = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
+        guard let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first?.appending("/\(Int(Date().timeIntervalSince1970)).mp4") else {return}
+        let url = URL(fileURLWithPath: path)
+        exportSession?.videoComposition = videoComposition
+        exportSession?.outputURL = url
+        exportSession?.outputFileType = .mp4
+        exportSession?.exportAsynchronously(completionHandler: {
+            print(path)
 
+        })
+                
     }
     
     func buildVideoComposition() -> AVVideoComposition {
@@ -112,20 +140,15 @@ class ViewController: UIViewController {
             let timeRange = instruction.compositionInstruction.timeRange
             let fromLayer = instruction.fromLayerInstruction
             let toLayer = instruction.toLayerInstruction
+                          // 2
             
+            let width = videoComposition.renderSize.width
+            let identityTransform = CGAffineTransform.identity
+            let firstTransition = CGAffineTransform(translationX: -width, y: 0)
+            let secondTransform = CGAffineTransform(translationX: width, y: 0)
             
-            let identityTransform = CGAffineTransform.identity;
-
-            let videoWidth = videoComposition.renderSize.width;
-
-            let fromDestTransform = CGAffineTransform(translationX: -videoWidth, y: 0)                           // 2
-            
-            let toStartTransform = CGAffineTransform(translationX: videoWidth, y: 0)                           // 2
-                
-
-            fromLayer?.setTransformRamp(fromStart: identityTransform, toEnd: fromDestTransform, timeRange: timeRange)
-            toLayer?.setTransformRamp(fromStart: toStartTransform, toEnd: identityTransform, timeRange: timeRange)
-            
+            fromLayer?.setTransformRamp(fromStart: identityTransform, toEnd: firstTransition, timeRange: timeRange)
+            toLayer?.setTransformRamp(fromStart: secondTransform, toEnd: identityTransform, timeRange: timeRange)
             
             instruction.compositionInstruction.layerInstructions = [fromLayer!, toLayer!]
         }
@@ -148,8 +171,6 @@ class ViewController: UIViewController {
                 transitionInstructions.append(transition)
                 layerInstructionIndex = layerInstructionIndex == 1 ? 0 : 1;
             } else {
-                vci.backgroundColor = UIColor.blue.cgColor
-                printTimeRanges(timeRanges: [vci.timeRange])
             }
         }
         return transitionInstructions
@@ -159,10 +180,7 @@ class ViewController: UIViewController {
         let trackID = kCMPersistentTrackID_Invalid
         let compositionTrackA = composition.addMutableTrack(withMediaType: .video, preferredTrackID: trackID)
         let compositionTrackB = composition.addMutableTrack(withMediaType: .video, preferredTrackID: trackID)
-        
         let videoTracks = [compositionTrackA, compositionTrackB]
-        
-
         var cursorTime = CMTime.zero;
         let transitionDuration = CMTimeMake(value: 1, timescale: 1);
         
@@ -173,12 +191,20 @@ class ViewController: UIViewController {
                         
             let assetTrack = asset.tracks(withMediaType: .video).first
             
-            let assetTimeRange = CMTimeRangeMake(start: .zero, duration: asset.duration)
+            let assetTimeRange = CMTimeRangeMake(start: .zero, duration: videoDuration)
             try! currentTrack?.insertTimeRange(assetTimeRange, of: assetTrack!, at: cursorTime)
-                        
+            
+//            if cursorTime != .zero {
+//                currentTrack?.insertEmptyTimeRange(CMTimeRangeMake(start: .zero, duration: CMTimeSubtract(cursorTime, <#T##rhs: CMTime##CMTime#>)))
+//            }
+            
             cursorTime = CMTimeAdd(cursorTime, assetTimeRange.duration)
             cursorTime = CMTimeSubtract(cursorTime, transitionDuration)
         }
+        
+        printTimeRanges(timeRanges: [(compositionTrackA?.timeRange)!, (compositionTrackB?.timeRange)!])
+        
+        
     }
 
     @objc
@@ -220,23 +246,42 @@ class ViewController: UIViewController {
         view.addSubview(playButton)
         playButton.frame = CGRect(x: 100, y: compositionButton.frame.maxY + 20, width: view.bounds.width - 200, height: 40)
         playButton.addTarget(self, action: #selector(tapPlayButton), for: .touchUpInside)
+        
+        debugView = APLCompositionDebugView()
+        debugView.frame = CGRect(x: 0, y: view.bounds.height - 350, width: view.bounds.width, height: 300)
+        view.addSubview(debugView)
     }
+    
+    
 
     func setupPlayer() {
         assetA = AVURLAsset(url: url(for: 0), options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
         assetB = AVURLAsset(url: url(for: 1), options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
         assetC = AVURLAsset(url: url(for: 2), options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
-        playerItemA = AVPlayerItem(asset: assetA)
-        playerItemB = AVPlayerItem(asset: assetB)
-        playerItemC = AVPlayerItem(asset: assetC)
-        player = AVPlayer(playerItem: playerItemA)
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = CGRect(x: 0, y: segment.frame.maxY + 20, width: view.bounds.width, height: 300)
-        view.layer.addSublayer(playerLayer)
-
-        playerItemA.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-        playerItemB.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-        playerItemC.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+        
+        assetA.loadValuesAsynchronously(forKeys: ["tracks","duration","commonMetadata"]) {
+            print("complete 111")
+        }
+        
+        assetB.loadValuesAsynchronously(forKeys: ["tracks","duration","commonMetadata"]) {
+            print("complete 222")
+        }
+        
+        assetC.loadValuesAsynchronously(forKeys: ["tracks","duration","commonMetadata"]) {
+            print("complete 333")
+        }
+        
+//        playerItemA = AVPlayerItem(asset: assetA)
+//        playerItemB = AVPlayerItem(asset: assetB)
+//        playerItemC = AVPlayerItem(asset: assetC)
+//        player = AVPlayer(playerItem: playerItemA)
+//        playerLayer = AVPlayerLayer(player: player)
+//        playerLayer.frame = CGRect(x: 0, y: segment.frame.maxY + 20, width: view.bounds.width, height: 300)
+//        view.layer.addSublayer(playerLayer)
+//
+//        playerItemA.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+//        playerItemB.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+//        playerItemC.addObserver(self, forKeyPath: "status", options: .new, context: nil)
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
