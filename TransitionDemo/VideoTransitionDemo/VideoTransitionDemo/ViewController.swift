@@ -100,10 +100,7 @@ class ViewController: UIViewController {
         compositionResultItem = AVPlayerItem(asset: composition, automaticallyLoadedAssetKeys: ["tracks","duration","commonMetadata"])
         compositionResultItem.videoComposition = videoComposition
         compositionResultItem.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-        player = AVPlayer(playerItem: compositionResultItem)
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = CGRect(x: 0, y: segment.frame.maxY + 20, width: view.bounds.width, height: 300)
-        view.layer.addSublayer(playerLayer)
+        player.replaceCurrentItem(with: compositionResultItem)
         
 //        debugView.player = player
 //        debugView.synchronize(to: composition, videoComposition: videoComposition, audioMix: nil)
@@ -271,17 +268,17 @@ class ViewController: UIViewController {
             print("complete 333")
         }
         
-//        playerItemA = AVPlayerItem(asset: assetA)
-//        playerItemB = AVPlayerItem(asset: assetB)
-//        playerItemC = AVPlayerItem(asset: assetC)
-//        player = AVPlayer(playerItem: playerItemA)
-//        playerLayer = AVPlayerLayer(player: player)
-//        playerLayer.frame = CGRect(x: 0, y: segment.frame.maxY + 20, width: view.bounds.width, height: 300)
-//        view.layer.addSublayer(playerLayer)
-//
-//        playerItemA.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-//        playerItemB.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-//        playerItemC.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+        playerItemA = AVPlayerItem(asset: assetA)
+        playerItemB = AVPlayerItem(asset: assetB)
+        playerItemC = AVPlayerItem(asset: assetC)
+        player = AVPlayer(playerItem: playerItemA)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = CGRect(x: 0, y: segment.frame.maxY + 20, width: view.bounds.width, height: 300)
+        view.layer.addSublayer(playerLayer)
+
+        playerItemA.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+        playerItemB.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+        playerItemC.addObserver(self, forKeyPath: "status", options: .new, context: nil)
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
