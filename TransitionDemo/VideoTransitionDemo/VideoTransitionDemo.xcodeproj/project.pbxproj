@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4E4259A72456C4B700F0A04A /* TransitionInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4259A62456C4B700F0A04A /* TransitionInstructions.swift */; };
+		B768FCC324570AB30094DCCD /* test1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FCC124570AB30094DCCD /* test1.mp4 */; };
+		B768FCC624570B9A0094DCCD /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B768FCC524570B9A0094DCCD /* test.mp4 */; };
+		B768FCC92457322E0094DCCD /* APLCompositionDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = B768FCC82457322E0094DCCD /* APLCompositionDebugView.m */; };
 		CA2D30A7302289718197B077 /* 05_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA2D3775E4ECA7700969061D /* 05_blackhole.mp4 */; };
 		CA2D335868A26F8E3DD4AA33 /* 04_quasar.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA2D317DC7D850701799E5F7 /* 04_quasar.mp4 */; };
-		CA2D3691A8E109283E0316E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D357C94AAE639394327BF /* SceneDelegate.swift */; };
 		CA2D3697991AC5F1CFC03964 /* VideoTransitionDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2D32FEC60BFD2165B53941 /* VideoTransitionDemoUITests.swift */; };
 		CA2D375EDA4758924D20E5CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA2D3A7A41DBFBD753542BBA /* Main.storyboard */; };
 		CA2D392983E96999985131B2 /* 03_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA2D3BDF9FA7CA08363AF372 /* 03_nebula.mp4 */; };
@@ -42,6 +44,11 @@
 
 /* Begin PBXFileReference section */
 		4E4259A62456C4B700F0A04A /* TransitionInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionInstructions.swift; sourceTree = "<group>"; };
+		B768FCC124570AB30094DCCD /* test1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.mp4; sourceTree = "<group>"; };
+		B768FCC524570B9A0094DCCD /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
+		B768FCC72457322E0094DCCD /* APLCompositionDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLCompositionDebugView.h; sourceTree = "<group>"; };
+		B768FCC82457322E0094DCCD /* APLCompositionDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLCompositionDebugView.m; sourceTree = "<group>"; };
+		B768FCCA2457326B0094DCCD /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
 		CA2D30AD6C247658A3D5CBC9 /* 02_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file.mp4; path = 02_blackhole.mp4; sourceTree = "<group>"; };
 		CA2D30DFFBFA0B94EABD82F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		CA2D30E5A88EF9849A3F8848 /* 01_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file.mp4; path = 01_nebula.mp4; sourceTree = "<group>"; };
@@ -51,7 +58,6 @@
 		CA2D33167ADC07668352B761 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		CA2D33853B3E04EF5FAE6761 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA2D34E00F3FAEB724390431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
-		CA2D357C94AAE639394327BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CA2D3581EA558CD14E61760E /* VideoTransitionDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoTransitionDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2D3775E4ECA7700969061D /* 05_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file.mp4; path = 05_blackhole.mp4; sourceTree = "<group>"; };
 		CA2D3832584C5A34DDA422A6 /* VideoTransitionDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransitionDemoTests.swift; sourceTree = "<group>"; };
@@ -91,6 +97,8 @@
 		CA2D30D88AE4DB935B06AEC9 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				B768FCC524570B9A0094DCCD /* test.mp4 */,
+				B768FCC124570AB30094DCCD /* test1.mp4 */,
 				CA2D30E5A88EF9849A3F8848 /* 01_nebula.mp4 */,
 				CA2D3BDF9FA7CA08363AF372 /* 03_nebula.mp4 */,
 				CA2D317DC7D850701799E5F7 /* 04_quasar.mp4 */,
@@ -131,12 +139,14 @@
 		CA2D3BFBEE5C7ED7A7D95C1E /* VideoTransitionDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B768FCC72457322E0094DCCD /* APLCompositionDebugView.h */,
+				B768FCC82457322E0094DCCD /* APLCompositionDebugView.m */,
 				CA2D33167ADC07668352B761 /* Info.plist */,
 				CA2D3E2BE63409AE9772605D /* Assets.xcassets */,
 				CA2D352D0C85CF19F7576944 /* LaunchScreen.storyboard */,
 				CA2D31E9211C93FAF0BE3735 /* AppDelegate.swift */,
-				CA2D357C94AAE639394327BF /* SceneDelegate.swift */,
 				CA2D3D091BB9C2725859695D /* ViewController.swift */,
+				B768FCCA2457326B0094DCCD /* BridgeHeader.h */,
 				CA2D3A7A41DBFBD753542BBA /* Main.storyboard */,
 				CA2D30D88AE4DB935B06AEC9 /* Video */,
 				4E4259A62456C4B700F0A04A /* TransitionInstructions.swift */,
@@ -217,6 +227,11 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = zxf;
+				TargetAttributes = {
+					CA2D3418AB771F029799C52E = {
+						DevelopmentTeam = F6MK8JGT5P;
+					};
+				};
 			};
 			buildConfigurationList = CA2D3EAA999E3C60263F0091 /* Build configuration list for PBXProject "VideoTransitionDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -246,10 +261,12 @@
 			files = (
 				CA2D3A27A875E2C0A46ECA78 /* Assets.xcassets in Resources */,
 				CA2D3DFC71083CB6250A826A /* LaunchScreen.storyboard in Resources */,
+				B768FCC624570B9A0094DCCD /* test.mp4 in Resources */,
 				CA2D375EDA4758924D20E5CF /* Main.storyboard in Resources */,
 				CA2D3DCAA1302593A3B3F12B /* 01_nebula.mp4 in Resources */,
 				CA2D392983E96999985131B2 /* 03_nebula.mp4 in Resources */,
 				CA2D335868A26F8E3DD4AA33 /* 04_quasar.mp4 in Resources */,
+				B768FCC324570AB30094DCCD /* test1.mp4 in Resources */,
 				CA2D3F22479A4389F3CE0589 /* 02_blackhole.mp4 in Resources */,
 				CA2D30A7302289718197B077 /* 05_blackhole.mp4 in Resources */,
 			);
@@ -285,7 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA2D39B0F43E3369B31DCFC0 /* AppDelegate.swift in Sources */,
-				CA2D3691A8E109283E0316E7 /* SceneDelegate.swift in Sources */,
+				B768FCC92457322E0094DCCD /* APLCompositionDebugView.m in Sources */,
 				CA2D3FE376323CC996DE7542 /* ViewController.swift in Sources */,
 				4E4259A72456C4B700F0A04A /* TransitionInstructions.swift in Sources */,
 			);
@@ -505,10 +522,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F6MK8JGT5P;
 				INFOPLIST_FILE = VideoTransitionDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zxf.www.VideoTransitionDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/mr.zhou/Desktop/LearnAVFoundation/LearnAVFoundation/TransitionDemo/VideoTransitionDemo/VideoTransitionDemo/BridgeHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -518,10 +538,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F6MK8JGT5P;
 				INFOPLIST_FILE = VideoTransitionDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zxf.www.VideoTransitionDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/mr.zhou/Desktop/LearnAVFoundation/LearnAVFoundation/TransitionDemo/VideoTransitionDemo/VideoTransitionDemo/BridgeHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
