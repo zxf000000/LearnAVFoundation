@@ -42,7 +42,6 @@ class ViewController: UIViewController {
     
     var composition: AVMutableComposition!
     
-
     var videoNames = [
         "test.mp4",
         "test1.mp4",
@@ -50,7 +49,6 @@ class ViewController: UIViewController {
     ]
 
     var segment: UISegmentedControl!
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
